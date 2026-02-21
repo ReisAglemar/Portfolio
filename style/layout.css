@@ -1,0 +1,14 @@
+body {
+    font-family: var(--font-padrao), monospace;
+    font-weight: var(--peso-corpo);
+    line-height: 1.6;
+}
+
+h1,
+h2{
+    font-weight: var(--peso-titulo);
+}
+
+h3{
+    font-weight: var(--peso-botoes);
+}

@@ -1,0 +1,16 @@
+:root {
+    /*FONTE*/
+    --font-padrao: "Source Code Pro";
+
+    --peso-corpo: 400;
+    --peso-botoes: 500;
+    --peso-titulo: 700;
+
+    /*REFERENCIA DE TAMANHO DE TELA*/
+    --mobile: 480px;
+    --tablet: 768px;
+    --desktop: 1024px;
+
+    --fundo-principal-escuro: #020126;
+
+}
