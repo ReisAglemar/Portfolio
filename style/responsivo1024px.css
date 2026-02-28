@@ -1,0 +1,236 @@
+@media (min-width: 1024px) {
+
+    /*======== GERAL ========*/
+    .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "header header"
+            "main main"
+            "footer footer";
+    }
+
+    .desktop {
+        display: block;
+    }
+
+    .mobile {
+        display: none;
+    }
+
+    /*======== FIM GERAL ========*/
+    /*========== HEADER CAPA ==========*/
+    .intro {
+        max-width: 80%;
+        margin: 0 auto;
+        display: grid;
+        align-items: center;
+        gap: 1rem;
+        grid-template-columns: 1fr 1.5fr;
+        grid-template-areas:
+        "nome foto"
+        "descricao foto"
+        "menu menu";
+    }
+
+    .intro figure {
+        padding: 0;
+    }
+
+    #nome {
+        grid-area: nome;
+    }
+
+    #foto {
+        grid-area: foto;
+
+    }
+
+    #descricao {
+        grid-area: descricao;
+
+    }
+
+    #menu {
+        grid-area: menu;
+    }
+
+    /*========== FIM HEADER CAPA ==========*/
+    /*========== MAIN CONHECIMENTOS ==========*/
+    #conhecimentos {
+        max-width: clamp(800px, 60%, 1200px);
+        margin: 0 auto;
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+        "titulo-conhecimento titulo-conhecimento"
+        "html css"
+        "js java"
+        "git linux";
+    }
+
+    #titulo-conhecimentos {
+        grid-area: titulo-conhecimento;
+    }
+
+    #html {
+        grid-area: html;
+    }
+
+    #css {
+        grid-area: css;
+    }
+
+    #js {
+        grid-area: js;
+    }
+
+    #java {
+        grid-area: java;
+    }
+
+    #git {
+        grid-area: git;
+    }
+
+    #linux {
+        grid-area: linux;
+    }
+
+    #conhecimentos .altera-bg {
+        background-color: var(--titulo-principal-claro);
+    }
+
+    #conhecimentos .altera-bg h3,
+    #conhecimentos .altera-bg p,
+    #conhecimentos .altera-bg p strong,
+    #conhecimentos .altera-bg ul li {
+        color: var(--cor-texto-escuro);
+    }
+
+    #conhecimentos h3 {
+        text-align: center;
+        font-weight: var(--peso-titulo);
+    }
+
+    /*========== FIM MAIN CONHECIMENTOS ==========*/
+    /*========== MAIN PROJETOS ==========*/
+    #projetos {
+        background-color: var(--fundo-principal-escuro);
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0 10% 5rem 10%;
+        display: grid;
+        column-gap: 7rem;
+        row-gap: 2rem;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+        "titulo-projeto titulo-projeto"
+        "super-trunfo garage-database"
+        "portfolio novo-projeto";
+    }
+
+    #titulo-projetos {
+        grid-area: titulo-projeto;
+    }
+
+    #super-trunfo {
+        grid-area: super-trunfo;
+    }
+
+    #garage-database {
+        grid-area: garage-database;
+    }
+
+    #portfolio {
+        grid-area: portfolio;
+    }
+
+    #novo-projeto {
+        grid-area: novo-projeto;
+    }
+
+    #projetos h2,
+    #projetos h3,
+    #projetos p,
+    #projetos ul li,
+    #projetos hr {
+        color: var(--cor-texto-claro);
+    }
+
+    #projetos hr {
+        background-color: var(--linhas-escuro);
+    }
+
+    #projetos nav a {
+        background-color: var(--destaque-botao);
+        color: var(--fundo-principal-escuro);
+        border: 1px solid var(--destaque-botao);
+        box-shadow: 0 0 8px var(--destaque-botao);
+    }
+
+    #projetos p strong {
+        color: var(--destaque-botao);
+        font-weight: var(--peso-titulo);
+    }
+
+    #projetos h3 {
+        text-align: center;
+        font-weight: var(--peso-titulo);
+    }
+
+    #projetos section .overflow{
+        padding: 2rem 0;
+        height: 500px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: var(--destaque-botao) var(--fundo-secundario-escuro);
+    }
+    /*========== FIM MAIN PROJETOS ==========*/
+
+    /*========== FOOTER ==========*/
+
+    .container-footer input,
+    textarea,
+    button {
+        min-width: 40vw;
+    }
+
+    .container-footer h2{
+        padding-top: 5rem;
+    }
+
+    .container-footer form{
+        padding-bottom: 5rem;
+    }
+
+    /*========== FIM FOOTER ==========*/
+
+    /*======== TODOS OS :HOVER SERÃO TRATADOS AQUI ========*/
+    /*objetivo: garantir que no mobile não tenha hover*/
+    @media (hover: hover) and (pointer: fine) {
+
+        .header-nav ul li a,
+        .intro nav ul li a,
+        #projetos nav a,
+        .container-footer button{
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .header-nav ul li a:hover,
+        .intro nav ul li a:hover {
+            background-color: var(--destaque-botao);
+            color: var(--fundo-principal-escuro);
+            box-shadow: 0 0 8px var(--destaque-botao);
+            opacity: 1;
+        }
+
+        #projetos nav a:hover,
+        .container-footer button:hover{
+            background-color: var(--fundo-principal-escuro);
+            color: var(--cor-texto-claro);
+        }
+    }
+}

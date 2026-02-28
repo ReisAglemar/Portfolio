@@ -19,12 +19,12 @@
     --fundo-principal-claro: #f8fafc;
 
     --fundo-secundario-escuro: #0b0a33;
-    --fundo-secundario-claro: #f1f5f9;
+    --fundo-secundario-claro: #b2b2ba;
 
     --titulo-principal-escuro: #020126;
     --titulo-principal-claro: #f8fafc;
 
-    --cor-texto-escuro: #334155;
+    --cor-texto-escuro: #0b0a33;
     --cor-texto-claro: #e2e8f0;
 
     --linhas-escuro: #1e293b;
@@ -32,14 +32,8 @@
 
     --destaque-botao: #d7f205;
     --texto-botao: #020126;
+
+    --black: #000000;
+    --white: #ffffff;
     /*====================================*/
-}
-
-h1,
-h2 {
-    font-weight: var(--peso-titulo);
-}
-
-h3 {
-    font-weight: var(--peso-botoes);
 }

@@ -1,73 +1,741 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/main.css">
     <title>Reis A.</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
 </head>
 <body>
 <div class="container">
     <!--CAPA-->
-    <header id="apresentacao">
+    <header id="header">
         <nav class="header-nav">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="#contato">Contato</a></li>
-                <li><a href="https://github.com/ReisAglemar" target="_blank" class="social">Github</a></li>
-            </ul>
+                <li><a href="#conhecimentos">Skills</a></li>
+                <li><a href="#projetos">Projetos</a></li>
 
-            <ul>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#sobre">Projetos</a></li>
+                <li class="desktop"><a href="#" target="_blank">Artigos</a></li>
+                <li class="desktop"><a href="#" target="_blank">Agora</a></li>
+
+                <li><a href="#footer">Contato</a></li>
+
+                <li><a href="https://github.com/ReisAglemar" target="_blank" class="social">GitHub</a></li>
                 <li><a href="https://www.linkedin.com/in/aglemarreis/" target="_blank" class="social">LinkedIn</a></li>
             </ul>
         </nav>
 
-        <h1>Aglemar Reis</h1>
-        <h2>full stack developer</h2>
 
-        <figure>
-            <img src="img/pexels-cottonbro-cg-studio-8830899.jpg"
-                 alt="Foto de perfil">
-        </figure>
+        <section class="intro">
+            <section id="nome">
+                <h1>Aglemar Reis</h1>
+                <h2>full stack developer</h2>
+            </section>
 
-        <p>
-            Profissional em transição para a área de Tecnologia da Informação, cursando Engenharia de Software.
-        </p>
+            <figure id="foto">
+                <!--TODO carregar imagem pessoal -->
+                <img class="img-perfil"
+                     src="img/pexels-cottonbro-cg-studio-8830899.jpg"
+                     alt="Foto do perfil">
+                <figcaption>Foto do perfil</figcaption>
+            </figure>
 
-        <p>
-            Possuo experiência na área industrial, com perfil analítico e resolução de problemas.
-        </p>
+            <section id="descricao">
+                <p>
+                    Profissional em transição para a área de Tecnologia da Informação, cursando Engenharia de Software.
+                </p>
 
-        <p>
-            Busco atuar em TI contribuindo com soluções eficientes e bem estruturadas.
-        </p>
+                <p>
+                    Possuo experiência na área industrial, com perfil analítico e resolução de problemas.
+                </p>
+
+                <p>
+                    Busco atuar em TI contribuindo com soluções eficientes e bem estruturadas.
+                </p>
+            </section>
+
+            <nav id="menu">
+                <ul>
+                    <li><a href="#html">HTML</a></li>
+                    <li><a href="#css">CSS</a></li>
+                    <li class="mobile"><a href="#js">Js</a></li>
+                    <li class="desktop"><a href="#js">JavaScript</a></li>
+                    <li><a href="#java">Java</a></li>
+                    <li class="desktop"><a href="#git">Git</a></li>
+                    <li class="desktop"><a href="#linux">Linux</a></li>
+                </ul>
+            </nav>
+        </section>
     </header>
     <!--FIM CAPA-->
 
 
     <!--PRINCIPAL-->
-    <main id="sobre">
-        sobre
+    <main id="main">
+
+        <!--Conhecimentos-->
         <section id="conhecimentos">
-        </section>
+            <h2 id="titulo-conhecimentos">🎖️ Conhecimentos</h2>
 
-        <section id="artigos">
-        </section>
+            <section class="secao" id="html">
+                <h3>HTML</h3>
 
+                <figure>
+                    <img class="img-card"
+                         src="img/html.png"
+                         alt="Brasão html">
+                    <figcaption>Brasão html</figcaption>
+                </figure>
+
+                <p>
+                    Sou estudante de Engenharia de Software e desenvolvedor em formação, com foco na construção de
+                    aplicações web estruturadas e responsivas.
+                </p>
+
+                <p>
+                    Tenho conhecimento em <strong>HTML semântico</strong>, aplicando corretamente tags como header,
+                    main,
+                    section,
+                    article, aside, nav e footer para organizar o conteúdo de forma clara, acessível e otimizada para
+                    SEO.
+                </p>
+
+                <p>
+                    Estruturo layouts com mentalidade <strong>mobile-first,</strong> compreendendo que o mobile não é
+                    uma
+                    versão reduzida
+                    do desktop, mas a base da aplicação. Desenvolvo o HTML pensando na estrutura principal e utilizo CSS
+                    (Grid e Flexbox) para expandir a experiência em telas maiores.
+                </p>
+
+                <p>
+                    Possuo entendimento sobre organização de componentes, separação de responsabilidades e estrutura
+                    limpa de código, buscando sempre clareza, manutenção simples e escalabilidade.
+                </p>
+
+                <p>
+                    Estou em <strong>constante evolução,</strong> aprimorando minha capacidade de transformar layouts em
+                    interfaces bem
+                    estruturadas, acessíveis e alinhadas às boas práticas da web.
+                </p>
+            </section>
+
+            <section class="secao altera-bg" id="css">
+                <h3>CSS</h3>
+
+                <figure>
+                    <img class="img-card"
+                         src="img/css.png"
+                         alt="Brasão css">
+                    <figcaption>Brasão css</figcaption>
+                </figure>
+
+                <p>
+                    Possuo conhecimento em <strong>CSS moderno,</strong> aplicando boas práticas para construção de
+                    layouts organizados,
+                    responsivos e reutilizáveis.
+                </p>
+
+                <p>
+                    Trabalho com abordagem <strong>mobile-first,</strong> estruturando primeiro a experiência para
+                    dispositivos móveis e
+                    expandindo para telas maiores utilizando media queries de forma estratégica.
+                </p>
+
+                <p>
+                    Utilizo <strong>CSS Grid e Flexbox</strong> para criação de layouts complexos, compreendendo a
+                    diferença entre
+                    organização estrutural (Grid) e alinhamento/distribuição (Flexbox).
+                </p>
+
+                <p>
+                    Tenho experiência na criação de componentes reutilizáveis, organização modular de arquivos (como
+                    separação por componentes e importação em arquivo principal) e aplicação consistente de
+                    espaçamentos, sombras, bordas e tipografia.
+                </p>
+
+                <p>
+                    Também entendo a importância da hierarquia visual, responsividade e
+                    <strong>manutenção do código</strong>,
+                    buscando
+                    sempre clareza, escalabilidade e padronização no estilo da aplicação.
+                </p>
+            </section>
+
+            <section class="secao" id="js">
+                <h3>JavaScript</h3>
+
+                <figure>
+                    <img class="img-card"
+                         src="img/js.png"
+                         alt="Brasão javascript">
+                    <figcaption>Brasão javascript</figcaption>
+                </figure>
+
+                <p>
+                    Possuo conhecimento fundamental em JavaScript, com foco na compreensão da <strong>lógica de
+                    programação</strong>
+                    e
+                    manipulação básica do DOM.
+                </p>
+
+                <p>
+                    Desenvolvi aplicações simples para praticar conceitos como variáveis, condicionais, estruturas de
+                    repetição e funções, consolidando a base necessária para <strong>evolução na linguagem.</strong>
+                </p>
+
+                <p>
+                    Meu foco atual está no fortalecimento da lógica e na escrita de código claro e organizado,
+                    <strong>priorizando boas práticas</strong> e entendimento da base da linguagem antes de avançar para
+                    frameworks.
+                </p>
+            </section>
+
+            <section class="secao altera-bg" id="java">
+                <h3>Java</h3>
+
+                <figure>
+                    <img class="img-card"
+                         src="img/java.png"
+                         alt="Brasão java">
+                    <figcaption>Brasão java</figcaption>
+                </figure>
+
+                <p>
+                    Possuo conhecimento em Java com foco no desenvolvimento backend e construção de
+                    <strong>APIs REST.</strong>
+                    Trabalho aplicando os princípios da programação orientada a objetos (POO), utilizando
+                    encapsulamento, herança, polimorfismo e abstração na modelagem de entidades e regras de negócio.
+                </p>
+
+                <p>
+                    Tenho experiência na criação de APIs utilizando o ecossistema Spring, estruturando aplicações em
+                    camadas bem definidas (Controller, Service e Repository), compreendendo a importância da
+                    <strong>separação de responsabilidades</strong> e organização do código para facilitar
+                    manutenção e escalabilidade.
+                </p>
+            </section>
+
+            <section class="secao desktop" id="git">
+                <h3>Git</h3>
+
+                <figure>
+                    <img class="img-card"
+                         src="img/git.png"
+                         alt="Brasão git">
+                    <figcaption>Brasão git</figcaption>
+                </figure>
+
+                <p>
+                    Utilizo o Git como ferramenta central de versionamento, organizando meus projetos de forma
+                    estruturada e segura.
+                </p>
+
+                <p>
+                    Tenho conhecimento em <strong>controle de versões distribuído</strong>, aplicando corretamente,
+                    conceitos como commit, branch, merge, pull e push para manter histórico claro, rastreável e
+                    confiável.
+                </p>
+
+                <p>
+                    Estruturo meu fluxo com mentalidade <strong>controle incremental,</strong> compreendendo que cada
+                    commit deve representar
+                    uma unidade lógica de alteração. Escrevo mensagens descritivas e utilizo branches para
+                    desenvolvimento isolado,
+                    garantindo organização e estabilidade do código principal.
+                </p>
+
+                <p>
+                    Possuo entendimento sobre versionamento colaborativo, resolução de conflitos e boas práticas de
+                    integração,
+                    buscando sempre clareza no histórico, rastreabilidade e manutenção eficiente do projeto.
+                </p>
+
+                <p>
+                    <strong>Busco continuamente</strong> formas mais eficientes e organizadas de trabalhar com
+                    versionamento, aprimorando meu fluxo e minhas práticas no dia a dia dos projetos.
+                </p>
+            </section>
+
+            <section class="secao desktop" id="linux">
+                <h3>Linux</h3>
+
+                <figure>
+                    <img class="img-card"
+                         src="img/linux.png"
+                         alt="Brasão Linux">
+                    <figcaption>Brasão Linux</figcaption>
+                </figure>
+
+                <p>
+                    Sou entusiasta em sistema Linux, com foco na compreensão e administração de ambientes baseados em
+                    software livre.
+                </p>
+
+                <p>
+                    Tenho conhecimento em <strong>fundamentos do Linux</strong>, utilizando terminal para navegação no
+                    sistema de arquivos, gerenciamento de permissões, manipulação de processos e administração básica de
+                    usuários e serviços.
+                </p>
+
+                <p>
+                    Estruturo ambientes com mentalidade <strong>orientada a servidores,</strong> compreendendo que
+                    estabilidade, segurança e desempenho são pilares essenciais. Configuro serviços, realizo ajustes no
+                    sistema e aplico boas práticas para manter organização e previsibilidade.
+                </p>
+
+                <p>
+                    Possuo entendimento sobre estrutura de diretórios, gerenciamento de pacotes, controle de acesso e
+                    princípios de redes, buscando sempre clareza operacional, padronização e facilidade de manutenção.
+                </p>
+
+                <p>
+                    <strong>Tenho paixão</strong> pelo sistema, então aprofundo meus estudos em administração de
+                    sistemas, automação e segurança para atuar com maior autonomia e eficiência em ambiente Linux.
+                </p>
+            </section>
+        </section>
+        <!--Fim conhecimentos-->
+
+        <!--TODO fazer a secao artigos-->
+        <!--Artigos (APENAS NO DESKTOP)-->
+        <section id="artigos" class="desktop">
+        </section>
+        <!--Fim artigos-->
+
+        <!--Projetos-->
         <section id="projetos">
+            <h2 id="titulo-projetos">📚 Projetos</h2>
+
+            <section id="super-trunfo" class="projeto secao">
+                <h3>Super Trunfo versão digital</h3>
+
+                <figure>
+                    <img class="img-card"
+                         src="img/superTrunfo.png"
+                         alt="Imagem projeto Super Trunfo">
+                    <figcaption>Imagem projeto Super Trunfo</figcaption>
+                </figure>
+
+                <div class="overflow">
+                    <p>
+                        Projeto desenvolvido em Java com foco em aprofundar conhecimentos em Programação Orientada a
+                        Objetos, interfaces, manipulação de arrays e controle de fluxo.
+
+                        A proposta foi recriar o clássico jogo Super Trunfo em ambiente de console, aplicando regras
+                        reais
+                        de jogo e modelagem orientada a objetos.
+                    </p>
+                    <hr>
+                    <p>
+                        <strong>Decisão técnica intencional,</strong> mesmo podendo utilizar List, optei por trabalhar
+                        com
+                        arrays de tamanho fixo para exercitar:
+                    </p>
+
+                    <ul>
+                        <li><b>1-</b> Redimensionamento manual de estruturas;</li>
+                        <li><b>2-</b> Cópia de dados entre vetores;</li>
+                        <li><b>3-</b> Controle explícito de memória lógica;</li>
+                        <li><b>4-</b> Manipulação de índices.</li>
+                    </ul>
+
+                    <p>
+                        Essa decisão tornou o projeto significativamente mais desafiador e aumentou a profundidade da
+                        solução.
+                    </p>
+                    <hr>
+                    <p>
+                        <strong>Principal desafio resolvido,</strong> arrays possuem tamanho fixo. No jogo,
+                        O vencedor precisa ganhar uma carta e O derrotado precisa perder uma carta, para isso
+                        implementei
+                        uma estratégia baseada em:
+                    </P>
+
+                    <ul>
+                        <li><b>1-</b> Criação de um novo array com tamanho ajustado;</li>
+                        <li><b>2-</b> Cópia manual dos elementos;</li>
+                        <li><b>3-</b> Inserção ou remoção da carta na posição correta;</li>
+                        <li><b>4-</b> Rotação do baralho com méTODO específico (changeDeck);</li>
+                    </ul>
+
+                    <p>
+                        Isso foi feito através dos seguintes méTODOs:
+                    </p>
+
+                    <ul>
+                        <li><b>1-</b> earnCard;</li>
+                        <li><b>2-</b> loseCard;</li>
+                        <li><b>3-</b> changeDeck.</li>
+                    </ul>
+
+                    <p>
+                        Essa abordagem <strong>simula um comportamento dinâmico utilizando uma estrutura
+                        estática.</strong>
+                    </p>
+                    <hr>
+                    <p>
+                        <strong>Este projeto demonstra</strong> a aplicação sólida de Programação Orientada a Objetos,
+                        utilizando interface como contrato para definição das regras do jogo e garantindo separação
+                        clara
+                        de responsabilidades. A manipulação manual de arrays foi utilizada como exercício intencional de
+                        controle estrutural, envolvendo redimensionamento, cópia de dados e gerenciamento de índices.
+                    </p>
+
+                    <p>
+                        O desenvolvimento também
+                        envolveu estruturas de repetição para construção e distribuição do baralho, uso de randomização
+                        para
+                        embaralhamento e escolha de atributos pela máquina, além de <strong>organização em
+                        camadas,</strong>
+                        separando dados da regra de negócio. O controle de estado do jogo foi implementado de forma
+                        explícita, assegurando coerência entre rodadas e definição de vencedor, com modelagem de domínio
+                        simples e objetiva.
+                    </p>
+
+                    <p>
+                        <strong>Como diferencial,</strong> o projeto não depende de estruturas prontas como ArrayList,
+                        priorizando controle
+                        manual da lógica de funcionamento. A implementação inclui rotação de baralho, controle explícito
+                        do
+                        fluxo do jogo e organização do código por pacotes (entities e database), reforçando clareza
+                        estrutural e separação de responsabilidades.
+                    </p>
+
+                    <p>
+                        <strong>De forma geral,</strong> o projeto evidencia capacidade de resolver problemas
+                        estruturais,
+                        domínio dos fundamentos da linguagem Java, organização orientada a objetos e pensamento lógico
+                        aplicado na
+                        construção de uma solução completa. Também demonstra persistência na resolução de desafios
+                        técnicos,
+                        especialmente no gerenciamento dinâmico de estruturas originalmente estáticas.
+                    </p>
+
+                    <nav class="btg-projeto">
+                        <a href="https://github.com/ReisAglemar/superTrunfo" target="_blank">
+                            <strong>Ver Super Trunfo no GitHub</strong></a>
+                    </nav>
+
+                </div>
+            </section>
+
+            <section id="garage-database" class="projeto secao altera-bg">
+                <h3>Garage Database</h3>
+
+                <figure>
+                    <img class="img-card"
+                         src="img/garage%20Database.png"
+                         alt="Imagem projeto Garage Database">
+                    <figcaption>Imagem projeto Garage Database</figcaption>
+                </figure>
+
+                <div class="overflow">
+
+                    <p>
+                        O Garage Database é uma aplicação desenvolvida com Spring Boot que implementa um sistema
+                        completo de CRUD para gerenciamento de carros, caminhões e motocicletas, utilizando
+                        JPA/Hibernate para persistência de dados e modelagem com herança (TABLE_PER_CLASS).
+                    </p>
+
+                    <p>
+                        O diferencial do projeto está na integração com a <strong>API do Google Gemini.</strong> Durante
+                        o cadastro do veículo, a aplicação consome a API de IA generativa, que cria automaticamente uma
+                        descrição comercial persuasiva de 35 palavras, pronta para publicação.
+                    </p>
+                    <hr>
+                    <p>
+                        <strong>Problema resolvido,</strong> em plataformas de venda de veículos, a criação manual de
+                        descrições é repetitiva, inconsistente e dependente da habilidade do anunciante.
+                        O sistema resolve esse problema automatizando o processo.
+                    </p>
+
+                    <p>
+                        O usuário informa apenas os dados técnicos do veículo, e a aplicação gera um anúncio padronizado
+                        e otimizado para venda. Isso reduz esforço manual, aumenta produtividade e padroniza qualidade
+                        de anúncios.
+                    </p>
+                    <hr>
+                    <p>
+                        <strong>Arquitetura e Conceitos Aplicados:</strong>
+                    </p>
+
+                    <ul>
+                        <li><b>1-</b> Programação Orientada a Objetos;</li>
+                        <li><b>2-</b> Modelagem de domínio com entidades JPA;</li>
+                        <li><b>3-</b> Relacionamentos @ManyToOne e @OneToMany;</li>
+                        <li><b>4-</b> Consumo de API REST utilizando HttpClient;</li>
+                        <li><b>5-</b> Desserialização de JSON com Gson;</li>
+                        <li><b>6-</b> Tratamento de exceções customizadas;</li>
+                        <li><b>7-</b> Validações de regra de negócio (ano, preço, tipo de motor);</li>
+                        <li><b>8-</b> Arquitetura em camadas (Model, Repository, Service e App);</li>
+                        <li><b>9-</b> Uso de variáveis de ambiente para proteção da API Key.</li>
+                    </ul>
+                    <hr>
+                    <p>
+                        <strong>Visão estratégica,</strong> o projeto foi idealizado como um módulo de automação para
+                        plataformas de venda de veículos. Fluxo pensado como produto:
+                    </p>
+
+                    <ul>
+                        <li><b>1-</b> Usuário cadastra o veículo;</li>
+                        <li><b>2-</b> O sistema consome IA generativa;</li>
+                        <li><b>3-</b> O anúncio é criado automaticamente;</li>
+                        <li><b>4-</b> Pronto para publicação.</li>
+                    </ul>
+
+                    <p>
+                        A solução demonstra aplicação prática de IA integrada a um sistema transacional tradicional,
+                        conectando backend estruturado com inteligência artificial para geração de valor real ao
+                        usuário.
+                    </p>
+
+                    <nav class="btg-projeto">
+                        <a href="https://github.com/ReisAglemar/GarageDatabase" target="_blank">
+                            <strong>Ver Garage Database no GitHub</strong></a>
+                    </nav>
+
+                </div>
+            </section>
+
+            <section id="portfolio" class="proeto secao">
+                <h3>Portfólio Pessoal</h3>
+
+                <figure>
+                    <img class="img-card"
+                         src="img/portfolio.png"
+                         alt="Imagem projeto portifólio">
+                    <figcaption>Imagem projeto Portifólio</figcaption>
+                </figure>
+
+                <div class="overflow">
+
+                    <p>
+                        O Portfólio Pessoal é uma aplicação web desenvolvida com <strong>HTML semântico e CSS
+                        puro,</strong>
+                        estruturada com abordagem mobile-first e organização modular de estilos.
+                        A <strong>versão 1.0</strong> foi construída com foco em:
+                    </p>
+
+                    <ul>
+                        <li><b>1-</b> Estrutura semântica clara (header, main, section, footer, nav, figure);</li>
+                        <li><b>2-</b> Separação de responsabilidades no CSS (reset, variáveis, layout e componentes);
+                        </li>
+                        <li><b>3-</b> Uso de CSS Grid para estrutura global;</li>
+                        <li><b>4-</b> Uso de Flexbox para alinhamentos internos;</li>
+                        <li><b>5-</b> Aplicação de variáveis CSS :root para padronização de cores, tipografia e
+                            escalabilidade visual;
+                        </li>
+                        <li><b>6-</b> Organização visual baseada em hierarquia e contraste (seções claras e escuras).
+                        </li>
+                    </ul>
+
+                    <p>
+                        A versão atual pode ser verificada no rodapé da página. :)
+                    </p>
+                    <hr>
+                    <p>
+                        <strong>Decisões técnicas, arquitetura Mobile-First</strong> o layout foi pensado inicialmente
+                        para
+                        dispositivos móveis, utilizando uma única coluna como base estrutural. Elementos com classe
+                        .desktop
+                        são ocultados nessa versão, preparando o projeto para expansão responsiva futura.
+                    </p>
+
+                    <p>
+                        <strong>CSS modularizado,</strong> o CSS foi dividido estrategicamente em reset.css,
+                        variaveis.css,
+                        layout.css e componentes.css. TODOs importados via main.css, demonstrando organização e
+                        escalabilidade do projeto.
+                    </p>
+
+                    <p>
+                        <strong>Sistema de design baseado em variáveis,</strong> a utilização de :root centraliza tokens
+                        de
+                        design como, paleta de cores, pesos tipográficos, breakpoints (mobile, tablet, desktop).
+                        Isso permite manutenção simples e evolução consistente do layout.
+                    </p>
+
+                    <p>
+                        <strong>Estrutura preparada para evolução backend,</strong> mesmo sendo estático na v1.0, o
+                        projeto
+                        já possui, seção dedicada para artigos, estrutura pensada para cards dinâmicos, separação lógica
+                        e
+                        clara entre seções.
+                    </p>
+                    <hr>
+
+                    <p>
+                        <strong>Próximas versões,</strong> a evolução prevista inclui integração com PostgreSQL,
+                        backend em Java (Spring) ou Node.js, sistema de artigos dinâmicos, listagem em formato de cards
+                        com
+                        preview, carregamento individual do artigo selecionado e implementação de autenticação para
+                        área administrativa.
+                    </p>
+
+                    <p>
+                        A ideia é transformar o portfólio em uma aplicação full stack, onde o conteúdo será persistido
+                        em
+                        banco de dados e servido dinamicamente.
+                    </p>
+
+                    <!--todo alterar link após criar a main no github-->
+                    <nav class="btg-projeto">
+                        <a href="#" target="_blank">
+                            <strong>Ver Portifólio no GitHub</strong></a>
+                    </nav>
+
+                </div>
+            </section>
+
+            <section id="novo-projeto" class="proeto secao desktop">
+                <h3>Script de Automação</h3>
+
+                <figure>
+                    <img class="img-card"
+                         src="img/bash.png"
+                         alt="Imagem projeto bash">
+                    <figcaption>Imagem projeto Bash</figcaption>
+                </figure>
+
+                <div class="overflow">
+
+                    <p>
+                        O projeto de <strong>Automação em Linux</strong> foi desenvolvido com foco em administração de
+                        sistemas, controle de permissões e mitigação de riscos operacionais. A proposta foi automatizar
+                        tarefas críticas utilizando scripts Bash, garantindo execução controlada e segura no ambiente.
+                    </p>
+
+                    <p>
+                        A <strong>versão 1.0</strong> foi construída com foco em:
+                    </p>
+
+                    <ul>
+                        <li><b>1-</b> Criação de scripts Bash para automação de tarefas administrativas;</li>
+                        <li><b>2-</b> Configuração de execução sem senha utilizando sudoers;</li>
+                        <li><b>3-</b> Aplicação correta de permissões com chmod e chown;</li>
+                        <li><b>4-</b> Princípio do menor privilégio na delegação de acesso;</li>
+                        <li><b>5-</b> Validação de segurança e análise de vulnerabilidades no ambiente;</li>
+                        <li><b>6-</b> Testes controlados em ambiente Linux para evitar impacto em produção.</li>
+                    </ul>
+
+                    <p>
+                        O foco principal foi entender profundamente como o sistema de permissões do Linux funciona
+                        (usuário, grupo e outros), evitando risco como escalonamento indevido de privilégios.
+                    </p>
+                    <hr>
+                    <p>
+                        <strong>Execução controlada sem senha,</strong> foi configurada a execução de scripts
+                        específicos
+                        via sudo sem necessidade de senha, limitando estritamente quais comandos poderiam
+                        ser executados. Isso evita a exposição total de privilégios administrativos.
+                    </p>
+
+                    <p>
+                        <strong>Gestão de permissões e segurança,</strong> foram aplicados conceitos como permissões
+                        700, 750 e 755 de forma estratégica, além da definição adequada de proprietário e grupo.
+                        O objetivo foi impedir acesso indevido ou modificação não autorizada dos scripts.
+                    </p>
+
+                    <p>
+                        <strong>Verificação de vulnerabilidades,</strong> foi utilizada a ferramenta
+                        <strong>Lynis</strong> para auditoria de segurança no sistema Linux, identificando
+                        possíveis falhas de configuração, permissões excessivas e pontos de melhoria
+                        relacionados a hardening do ambiente.
+                    </p>
+                    <hr>
+                    <p>
+                        <strong>Aprendizados técnicos,</strong> o projeto consolidou conhecimentos sobre:
+                    </p>
+
+                    <ul>
+                        <li>Modelo de permissões do Linux (rwx);</li>
+                        <li>Configuração segura do arquivo /etc/sudoers;</li>
+                        <li>Hardening básico de sistemas;</li>
+                        <li>Boas práticas de automação segura;</li>
+                        <li>Riscos de escalonamento de privilégios.</li>
+                    </ul>
+
+                    <p>
+                        A proposta foi ir além da simples automação, focando na execução segura e previsível, algo
+                        essencial
+                        para ambientes corporativos e infraestrutura em Cloud.
+                    </p>
+                    <hr>
+                    <p>
+                        <strong>Próximas versões,</strong> a evolução prevista inclui implementação de logs
+                        estruturados,
+                        integração com monitoramento, execução via cron com controle de integridade e aplicação de
+                        práticas
+                        adicionais de hardening no sistema.
+                    </p>
+
+                    <p>
+                        O objetivo é evoluir o projeto para um modelo mais próximo de ambientes reais de produção,
+                        consolidando a administração de sistemas e infraestrutura.
+                    </p>
+
+                    <nav class="btg-projeto">
+                        <a href="https://github.com/ReisAglemar/scripstLinux" target="_blank">
+                            <strong>Ver Script no GitHub</strong></a>
+                    </nav>
+                </div>
+
+            </section>
         </section>
+        <!--Fim Projetos-->
+
     </main>
     <!--FIM PRINCIPAL-->
 
-
     <!--CONTATO-->
-    <footer id="contato">
-        contato
+    <footer id="footer">
+        <section class="container-footer">
+
+            <h2>📤 Entre em Contato</h2>
+
+            <form action="https://formspree.io/f/mjgelvky" method="POST">
+
+                <label for="name">Nome
+                    <input type="text"
+                           name="name"
+                           id="name"
+                           placeholder="Digite seu nome"
+                           required>
+                </label>
+
+                <label for="email">Email
+                    <input type="email"
+                           name="email"
+                           id="email"
+                           placeholder="Digite seu email"
+                           required>
+                </label>
+
+                <label for="assunto">Assunto
+                    <textarea name="assunto"
+                              id="assunto"
+                              placeholder="Digite sua mensagem"
+                              rows="8"
+                              required></textarea>
+                </label>
+
+                <button type="submit">Enviar ></button>
+            </form>
+
+            <section class="versao">
+                <p>
+                    <strong>Versão 1.0</strong>
+                    <br>
+                    ReisDev
+                </p>
+            </section>
+        </section>
     </footer>
+    <!--FIM CONTATO-->
 </div>
-<!--FIM CONTATO-->
 </body>
 </html>
