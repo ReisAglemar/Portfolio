@@ -3,11 +3,11 @@
 ## 📸 Preview
 
 <p align="center">
-  <img src="docs/desktop.png" width="70%">
+  <img src="img/printDesktop.png" width="70%">
 </p>
 
 <p align="center">
-  <img src="docs/mobile.png" width="30%">
+  <img src="img/printMobile.png" width="30%">
 </p>
 
 Aplicação web desenvolvida com **HTML semântico e CSS puro**, estruturada com abordagem **mobile-first** e organização modular de estilos.
