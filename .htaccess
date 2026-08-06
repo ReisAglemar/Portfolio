@@ -1,0 +1,15 @@
+# 1. Não permite listar diretórios
+Options -Indexes
+
+# 2. Bloqueia arquivos ocultos, exceto .well-known
+<FilesMatch "^\.(?!well-known)">
+    Require all denied
+</FilesMatch>
+
+# 3. Bloqueia arquivos sensíveis e backups
+<FilesMatch "\.(env|env\..*|bak|config|sql|log|sh)$">
+    Require all denied
+</FilesMatch>
+
+# 4. Bloqueia acesso ao repositório Git simulando arquivo inexistente
+RedirectMatch 404 /\.git
