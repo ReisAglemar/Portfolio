@@ -13,25 +13,24 @@
     --desktop: 1024px;
     /*====================================*/
 
-
-    /*PALETA DE CORES (em img referencia de uso)*/
-    --fundo-principal-escuro: #020126;
+    /*PALETA DE CORES (Harmonizada com Favicon Ciano/Azul)*/
+    --fundo-principal-escuro: #0f172a;
     --fundo-principal-claro: #f8fafc;
 
-    --fundo-secundario-escuro: #0b0a33;
-    --fundo-secundario-claro: #b2b2ba;
+    --fundo-secundario-escuro: #1e293b;
+    --fundo-secundario-claro: #e2e8f0;
 
-    --titulo-principal-escuro: #020126;
+    --titulo-principal-escuro: #0f172a;
     --titulo-principal-claro: #f8fafc;
 
-    --cor-texto-escuro: #0b0a33;
-    --cor-texto-claro: #e2e8f0;
+    --cor-texto-escuro: #1e293b;
+    --cor-texto-claro: #94a3b8;
 
-    --linhas-escuro: #1e293b;
-    --linhas-claro: #e2e8f0;
+    --linhas-escuro: #334155;
+    --linhas-claro: #cbd5e1;
 
-    --destaque-botao: #d7f205;
-    --texto-botao: #020126;
+    --destaque-botao: #00e5ff;
+    --texto-botao: #0f172a;
 
     --black: #000000;
     --white: #ffffff;
