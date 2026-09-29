@@ -116,3 +116,12 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/webstorm
 .idea/
+
+### Contato (Resend) e Python ###
+contato/.env
+__pycache__/
+*.pyc
+.venv/
+
+### Imagens originais (só local) ###
+img-src/
