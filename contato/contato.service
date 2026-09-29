@@ -1,0 +1,21 @@
+[Unit]
+Description=Serviço de contato do portfólio (Resend)
+# Depende do Docker porque escuta no IP da rede apache_default (172.21.0.1),
+# que só existe depois que o Docker sobe essa rede.
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+User=contato
+Group=contato
+WorkingDirectory=/opt/contato
+ExecStart=/usr/bin/python3 /opt/contato/servidor.py
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
