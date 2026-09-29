@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nota 02 de Notas de Campo: por que &quot;o cron já gera logs&quot; estava errado e como um log temporal e rastreável mudou a forma de manter o myDDNS.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/agora.css">
+    <link rel="stylesheet" href="style/notas.css">
+    <title>A cabeça de quem constrói e a de quem mantém | Notas de Campo | Reis A.</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+<div class="agora-container">
+
+    <!-- Header / Voltar -->
+    <header class="agora-header-top">
+        <a href="notas.html" class="btn-voltar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Notas de Campo
+        </a>
+
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            Nota 02 • 7 min de leitura
+        </div>
+    </header>
+
+    <article class="nota" id="nota-02">
+
+        <header class="nota-cabecalho reveal">
+            <span class="nota-numero">Nota 02</span>
+            <h1>A cabeça de quem constrói e a de quem mantém</h1>
+            <div class="nota-meta">
+                <span>📅 29 de setembro de 2026</span>
+                <span>⏱️ 7 min de leitura</span>
+            </div>
+            <div class="badge-group">
+                <span class="badge-pill highlight">Logs</span>
+                <span class="badge-pill">Manutenção</span>
+                <span class="badge-pill">Observabilidade</span>
+                <span class="badge-pill">Python</span>
+                <span class="badge-pill">Cron</span>
+            </div>
+        </header>
+
+        <!-- 1. O pensamento -->
+        <section class="nota-secao reveal">
+            <h2>"O cron já gera logs"</h2>
+            <p>
+                Quando escrevi o myDDNS, eu tinha uma certeza tranquila: <strong>o cron gera logs, então não preciso me
+                preocupar com logs.</strong> A aplicação ia rodar sozinha, em segundo plano, e se algo desse errado o
+                registro estaria lá.
+            </p>
+            <p>
+                Eu estava errado. O cron registra <strong>que executou o comando</strong>. Ele não sabe o que o seu programa
+                fez lá dentro, em que etapa parou, nem por quê. Saber que o job rodou às três da manhã é muito diferente de saber
+                o que aconteceu às três da manhã.
+            </p>
+            <p>
+                E o meu programa, na época, só usava <code>print()</code>. Num terminal, isso aparece na tela.
+                Sob o cron, <strong>não aparece em lugar nenhum onde eu vá olhar.</strong>
+            </p>
+
+            <blockquote class="nota-destaque">
+                Eu não tinha um problema de logs. Tinha uma crença de que o problema já estava resolvido por outra pessoa.
+            </blockquote>
+        </section>
+
+        <!-- 2. A primeira falha -->
+        <section class="nota-secao reveal">
+            <h2>A primeira falha</h2>
+            <p>
+                Veio a primeira falha em produção e foi um <strong>caos para achar a origem</strong>. Sem histórico, cada hipótese
+                exigia reproduzir o problema na mão: eu não sabia o que tinha rodado, quando, em qual etapa, nem com que resultado.
+                Estava investigando às cegas um sistema que, em teoria, eu conhecia por inteiro.
+            </p>
+            <p>
+                O rastro dessa caçada está no repositório: as sete correções de 27/07 que contei na
+                <a class="link-nota" href="nota-01.html">Nota 01</a>.
+                E há um detalhe que hoje me faz sorrir de nervoso: um desses commits corrige, no e-mail de falha, o caminho do
+                log que o administrador deveria consultar. <strong>O e-mail mandava eu olhar um log que o programa ainda nem tinha.</strong>
+            </p>
+        </section>
+
+        <!-- 3. Duas cabeças -->
+        <section class="nota-secao reveal">
+            <h2>Duas cabeças, o mesmo código</h2>
+            <p>
+                Não mudei de código entre o "antes" e o "depois". Mudei de lugar, e passei a olhar o programa como
+                quem vai ter de <em>viver com ele</em>:
+            </p>
+
+            <div class="duas-cabecas">
+                <div class="cabeca-card cabeca-constroi">
+                    <span class="cabeca-tag">Quem constrói</span>
+                    <h3>"Funciona?"</h3>
+                    <ul>
+                        <li>Pergunta se o caminho feliz funciona;</li>
+                        <li>Está sentado diante do programa, com o terminal aberto;</li>
+                        <li>Vê o erro na hora, então o log parece um luxo;</li>
+                        <li>Dá o trabalho por pronto quando o teste passa.</li>
+                    </ul>
+                </div>
+
+                <div class="cabeca-card cabeca-mantem">
+                    <span class="cabeca-tag">Quem mantém</span>
+                    <h3>"Como vou saber quando quebrar?"</h3>
+                    <ul>
+                        <li>Pergunta o que acontece quando dá errado;</li>
+                        <li>Chega horas ou dias depois, sem contexto nenhum;</li>
+                        <li>Só tem o que o programa deixou registrado;</li>
+                        <li>Dá o trabalho por pronto quando ele consegue se explicar.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p>
+                E o mantenedor, no meu caso, sou eu mesmo, só que <strong>seis meses mais velho e sem lembrar de nada</strong>.
+            </p>
+        </section>
+
+        <!-- 4. O que fiz -->
+        <section class="nota-secao reveal">
+            <h2>A solução: um log que conta uma história</h2>
+            <p>
+                No dia seguinte (28/07), foram <strong>dez commits</strong> dedicados a isso. A ideia não foi "gravar
+                alguma coisa em arquivo", e sim gerar um registro <strong>temporal e rastreável</strong>, que dê para ler de cima para baixo
+                e entender o que aconteceu. Na prática:
+            </p>
+
+            <div class="problemas problemas-2">
+                <div class="problema-card">
+                    <div class="icon-wrapper">🕒</div>
+                    <h3>Temporal</h3>
+                    <p>
+                        Cada linha tem data, hora e nível (<code>INFO</code> ou <code>ERROR</code>).
+                        Um separador marca o início de cada evento, então dá para saber onde uma história termina e outra começa.
+                    </p>
+                </div>
+
+                <div class="problema-card">
+                    <div class="icon-wrapper">🧵</div>
+                    <h3>Rastreável</h3>
+                    <p>
+                        Cada etapa é registrada antes e depois de acontecer: Cloudflare, cache, e-mail.
+                        Se a linha "iniciando" aparece e a de "sucesso" não, eu sei exatamente onde parou.
+                    </p>
+                </div>
+
+                <div class="problema-card">
+                    <div class="icon-wrapper">🔗</div>
+                    <h3>Com a causa junto</h3>
+                    <p>
+                        Nas falhas, registro a exceção, o contexto e a causa original.
+                        As mensagens de erro encadeiam a exceção anterior, então a origem não se perde no caminho.
+                    </p>
+                </div>
+
+                <div class="problema-card">
+                    <div class="icon-wrapper">🚦</div>
+                    <h3>Código de saída</h3>
+                    <p>
+                        O programa termina com <code>0</code> em caso de sucesso e <code>1</code> em caso de falha,
+                        para que o ambiente que o executa também consiga distinguir uma coisa da outra.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Antes e depois -->
+        <section class="nota-secao reveal">
+            <h2>O mesmo erro, antes e depois</h2>
+            <p>
+                Este é o tratamento de falha em <code>myDDNS.py</code>. A informação mais importante do programa
+                estava sendo jogada num lugar onde ninguém olha:
+            </p>
+
+            <div class="terminal-block">
+                <div class="terminal-top-bar">
+                    <div class="terminal-dots">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                    </div>
+                    <span class="terminal-title">myDDNS.py</span>
+                </div>
+                <div class="terminal-content">
+                    <span class="diff-del">- print(f"Ops! Algo não saiu conforme o esperado!\n"</span><br>
+                    <span class="diff-del">-       f"Detalhe: {e}")</span><br><br>
+                    <span class="diff-add">+ configurarLogging()</span><br>
+                    <span class="diff-add">+ logging.info("=" * 30 + " ERRO NO SISTEMA " + "=" * 30)</span><br>
+                    <span class="diff-add">+ logging.error(f"Falha na execução principal")</span><br>
+                    <span class="diff-add">+ logging.error(f"Exceção: {e}.")</span><br>
+                    <span class="diff-add">+ logging.error(f"Contexto: {e.__context__}.")</span><br>
+                    <span class="diff-add">+ logging.error(f"Causa: {e.__cause__}.")</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Linha do tempo -->
+        <section class="nota-secao reveal">
+            <h2>Como o log nasceu</h2>
+
+            <ol class="timeline">
+                <li class="timeline-item">
+                    <span class="timeline-marca" aria-hidden="true"></span>
+                    <span class="timeline-titulo">Um módulo só para isso</span>
+                    <p>
+                        Criei o <code>gerarLog.py</code>, que centraliza a configuração: formato da linha, nível, e gravação
+                        em arquivo e na tela ao mesmo tempo.
+                    </p>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marca" aria-hidden="true"></span>
+                    <span class="timeline-titulo">Ligando o log ao fluxo</span>
+                    <p>
+                        Cada etapa do <code>myDDNS.py</code> passou a registrar o início e o fim. Todos os
+                        <code>print</code> dos blocos <code>except</code> viraram chamadas de log.
+                    </p>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marca" aria-hidden="true"></span>
+                    <span class="timeline-titulo">Menos dados, mais sinal</span>
+                    <p>
+                        A função que monta o e-mail passou a receber o IP como parâmetro, o que eliminou uma requisição.
+                        O corpo da requisição foi reduzido ao essencial.
+                    </p>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marca" aria-hidden="true"></span>
+                    <span class="timeline-titulo">O log também pode falhar</span>
+                    <p>
+                        O último commit envolveu em <code>try/except</code> a leitura e a escrita do cache, com mensagens
+                        pensadas para o novo módulo. A mesma lição da Nota 01, repetida: o mecanismo de observação também precisa ser observável.
+                    </p>
+                </li>
+            </ol>
+        </section>
+
+        <!-- 7. Exemplo de log -->
+        <section class="nota-secao reveal">
+            <h2>Como uma falha passou a aparecer</h2>
+            <p>
+                Um exemplo <strong>ilustrativo</strong> do formato que o módulo gera (não é um log real, só as mensagens do código
+                em uma falha na etapa da Cloudflare). Basta ler para saber o quê, quando e onde:
+            </p>
+
+            <div class="terminal-block">
+                <div class="terminal-top-bar">
+                    <div class="terminal-dots">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                    </div>
+                    <span class="terminal-title">myddns.log (exemplo ilustrativo)</span>
+                </div>
+                <div class="terminal-content">
+                    AAAA-MM-DD 03:00:02 <span class="log-info">[INFO]</span> ============================== NOVO EVENTO ==============================<br>
+                    AAAA-MM-DD 03:00:02 <span class="log-info">[INFO]</span> Detectada alteração no IP.<br>
+                    AAAA-MM-DD 03:00:02 <span class="log-info">[INFO]</span> Iniciando atualização na Cloudflare...<br>
+                    AAAA-MM-DD 03:00:03 <span class="log-info">[INFO]</span> ============================== ERRO NO SISTEMA ==============================<br>
+                    AAAA-MM-DD 03:00:03 <span class="log-error">[ERROR]</span> Falha na execução principal<br>
+                    AAAA-MM-DD 03:00:03 <span class="log-error">[ERROR]</span> Exceção: Erro ao atualizar IP na Cloudflare 403.<br>
+                    AAAA-MM-DD 03:00:03 <span class="log-error">[ERROR]</span> Causa: HTTP Error 403: Forbidden.
+                </div>
+            </div>
+
+            <p>
+                Repare no que <strong>não</strong> aparece: "Cloudflare atualizada com sucesso" nem "Cache atualizado".
+                A ausência dessas linhas também é informação. O log diz até onde o programa chegou.
+            </p>
+        </section>
+
+        <!-- 8. Perguntas -->
+        <section class="detail-card nota-licoes reveal">
+            <div class="detail-card-header">
+                <div class="icon-wrapper">❓</div>
+                <h2>Perguntas que faço antes de dar algo como pronto</h2>
+                <div class="badge-group">
+                    <span class="badge-pill highlight">Mentalidade</span>
+                    <span class="badge-pill">Manutenção</span>
+                </div>
+            </div>
+            <div class="detail-card-body">
+                <ul>
+                    <li>Se isso falhar às três da manhã, como vou saber?</li>
+                    <li>Quando eu olhar o registro, ele me diz em qual etapa parou e por quê?</li>
+                    <li>Alguém que não escreveu esse código consegue seguir a história?</li>
+                    <li>Estou contando com um mecanismo que ninguém prometeu que existe?</li>
+                    <li>O que acontece se o próprio aviso de falha falhar?</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 9. Fechamento -->
+        <section class="nota-secao reveal">
+            <h2>O que ficou</h2>
+            <p>
+                Hoje parece óbvio. Mas na hora de criar, <strong>o pensamento era o oposto</strong>: log era o que a gente
+                acrescenta depois, se sobrar tempo. É assim que quem constrói pensa, porque, sentado diante do programa, o erro
+                aparece sozinho.
+            </p>
+            <p>
+                O log é a forma que o programa tem de <strong>falar quando ninguém está olhando</strong>. Ele é a interface entre o
+                código e o seu mantenedor futuro. E o mantenedor, quase sempre, é o mesmo desenvolvedor de antes, só que sem contexto e com pressa.
+            </p>
+            <p>
+                Fica uma pergunta em aberto: como o log só grava quando algo acontece, "nada mudou" e "o cron não rodou"
+                deixam o mesmo silêncio. Distinguir um do outro é o próximo passo.
+            </p>
+        </section>
+
+    </article>
+
+    <!-- Navegação entre notas -->
+    <nav class="nota-navegacao" aria-label="Navegação entre notas">
+        <a href="nota-01.html" class="nav-anterior">
+            <small>← Nota anterior</small>
+            <strong>O abismo entre o teste e a produção</strong>
+        </a>
+        <span></span>
+    </nav>
+
+    <!-- Footer consistente -->
+    <footer class="notas-footer">
+        <p>
+            Aglemar Reis • Notas de Campo •
+            <a href="notas.html">Todas as notas</a> •
+            <a href="index.html">Portfólio</a>
+        </p>
+    </footer>
+
+</div>
+</body>
+</html>

@@ -58,6 +58,7 @@ Organizado de forma modular:
         ├── variaveis.css
         ├── layout.css
         ├── componentes.css
+        ├── animacoes.css
         ├── main.css (importa os demais)
         ├── responsivo768px.css
         └── responsivo1024px.css
@@ -122,6 +123,17 @@ Cada projeto apresenta:
 
 ---
 
+### 📍 Página Agora (/now & Homelab)
+
+Página dedicada a registrar a implementação real de infraestrutura e servidor doméstico (**Homelab**), baseada no documento `/srv/documentation/decisoes.md`:
+- **Hardware & SO**: Lenovo ThinkPad L14 Gen 2 (Intel Core i7-1185G7), Ubuntu Server 26.04 LTS (governor *performance*, suspensão/tampa desabilitadas).
+- **Acesso & VPN**: **WireGuard** (`wg0` na rede privada `10.0.0.0/24`) como método mandatório de acesso remoto externo.
+- **Hardening & Firewall (UFW)**: Política padrão *DROP Incoming*, única porta pública `51820/udp` (WireGuard), SSH exclusivo por chave pública, Cockpit (9090 HTTPS) restrito a LAN/VPN.
+- **Estrutura `/srv` & Docker**: Padrão padronizado de containers com Docker Compose, Portainer (9443 HTTPS), Apache (self-hosting do site) e Samba (445 exclusivo LAN para backup de fotos da família).
+- **Armazenamento**: HDA (produção), HDB (backup), RAID no SO e isolamento de permissões (root vs sysadmin).
+
+---
+
 ### 📤 Contato
 
 Formulário funcional utilizando **Formspree**, permitindo envio direto de mensagens via e-mail sem backend próprio.
@@ -172,4 +184,3 @@ Foco em Backend Java e Administração de Sistemas
 
 GitHub: https://github.com/ReisAglemar  
 LinkedIn: https://www.linkedin.com/in/aglemarreis/
-	

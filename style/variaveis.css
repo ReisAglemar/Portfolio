@@ -1,38 +1,62 @@
 :root {
-    /*FONTE*/
-    --font-padrao: "Source Code Pro";
+    /* FONTE */
+    --font-padrao: "Source Code Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
 
     --peso-corpo: 400;
-    --peso-botoes: 500;
+    --peso-botoes: 600;
     --peso-titulo: 700;
     /*====================================*/
 
-    /*REFERENCIA DE TAMANHO DE TELA*/
+    /* BREAKPOINTS DE TELA */
     --mobile: 480px;
     --tablet: 768px;
     --desktop: 1024px;
     /*====================================*/
 
-    /*PALETA DE CORES (Harmonizada com Favicon Ciano/Azul)*/
-    --fundo-principal-escuro: #0f172a;
-    --fundo-principal-claro: #f8fafc;
+    /* PALETA DE CORES MODERNA & ELEGANTE (Dark Tech Slate + Electric Lime) */
+    --fundo-principal-escuro: #090d16;
+    --fundo-principal-claro: #0d1322;
+    --fundo-secundario-escuro: #0f172a;
+    --fundo-secundario-claro: #1e293b;
 
-    --fundo-secundario-escuro: #1e293b;
-    --fundo-secundario-claro: #e2e8f0;
+    /* SUPERFÍCIES DE CARDS */
+    --fundo-card: #111a2e;
+    --fundo-card-alt: #16223b;
+    --fundo-card-hover: #1a2947;
+    --borda-card: rgba(255, 255, 255, 0.08);
+    --borda-card-hover: rgba(187, 244, 38, 0.35);
 
-    --titulo-principal-escuro: #0f172a;
+    /* HIERARQUIA DE TEXTO */
+    --cor-texto-claro: #f8fafc;
+    --cor-texto-secundario: #94a3b8;
+    --cor-texto-muted: #64748b;
+    --cor-texto-escuro: #e2e8f0;
+
+    --titulo-principal-escuro: #f8fafc;
     --titulo-principal-claro: #f8fafc;
 
-    --cor-texto-escuro: #1e293b;
-    --cor-texto-claro: #94a3b8;
+    /* DIVISORES & LINHAS */
+    --linhas-escuro: rgba(255, 255, 255, 0.08);
+    --linhas-claro: rgba(255, 255, 255, 0.12);
 
-    --linhas-escuro: #334155;
-    --linhas-claro: #cbd5e1;
+    /* DESTAQUE & ACENTUAÇÃO (Electric Lime) */
+    --destaque-botao: #bbf426;
+    --destaque-hover: #cdfa3a;
+    --destaque-glow: rgba(187, 244, 38, 0.25);
+    --texto-botao: #090d16;
 
-    --destaque-botao: #00e5ff;
-    --texto-botao: #0f172a;
-
+    /* BÁSICOS */
     --black: #000000;
     --white: #ffffff;
+
+    /* SOMBRAS & ELEVAÇÕES */
+    --sombra-card: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    --sombra-card-hover: 0 20px 35px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(187, 244, 38, 0.15);
+    --sombra-botao: 0 4px 15px rgba(187, 244, 38, 0.35);
+    --sombra-botao-hover: 0 6px 22px rgba(187, 244, 38, 0.55);
+
+    /* TRANSIÇÕES SUAVES & FLUIDAS */
+    --transicao-rapida: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    --transicao-fluida: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     /*====================================*/
 }

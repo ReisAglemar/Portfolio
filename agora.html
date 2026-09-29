@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Documentação técnica da infraestrutura do Homelab: Lenovo ThinkPad L14 Gen 2, Ubuntu Server 26.04 LTS, WireGuard, Docker Compose, Cockpit, UFW e padrão /srv.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/agora.css">
+    <title>Homelab & Servidor Real | Reis A.</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+<div class="agora-container">
+
+    <!-- Header / Voltar -->
+    <header class="agora-header-top">
+        <a href="index.html" class="btn-voltar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Voltar ao Portfólio
+        </a>
+
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            Ubuntu Server 26.04 LTS • Operacional
+        </div>
+    </header>
+
+    <!-- Hero / Introdução -->
+    <section class="agora-hero reveal">
+        <h1>Agora</h1>
+        <p class="agora-subtitle">
+            Implementação real do meu <strong>servidor doméstico (Homelab)</strong> em hardware dedicado.
+            Este ambiente é o meu laboratório prático de administração de sistemas Linux, arquitetura de redes privadas com WireGuard,
+            padronização de containers com Docker Compose, segurança defensiva (UFW / Hardening) e self-hosting.
+        </p>
+    </section>
+
+    <!-- Specs Rápidas do Servidor (Hardware & SO) -->
+    <section class="specs-grid reveal">
+        <div class="spec-item">
+            <span class="spec-label">Hardware Bare-Metal</span>
+            <span class="spec-value">ThinkPad L14 Gen 2</span>
+            <span class="spec-desc">Intel Core i7-1185G7</span>
+        </div>
+
+        <div class="spec-item">
+            <span class="spec-label">Sistema Operacional</span>
+            <span class="spec-value">Ubuntu Server 26.04</span>
+            <span class="spec-desc">Kernel Linux LTS • Sem GUI</span>
+        </div>
+
+        <div class="spec-item">
+            <span class="spec-label">Otimização de Energia</span>
+            <span class="spec-value">Governor: Performance</span>
+            <span class="spec-desc">Suspensão e tampa desabilitadas</span>
+        </div>
+
+        <div class="spec-item">
+            <span class="spec-label">Rede & Conectividade</span>
+            <span class="spec-value">IP Estático (Netplan)</span>
+            <span class="spec-desc">VPN WireGuard wg0: 10.0.0.0/24</span>
+        </div>
+    </section>
+
+    <!-- Blueprint Gráfico da Arquitetura do Homelab -->
+    <section class="blueprint-wrapper reveal">
+        <div class="blueprint-header">
+            <h2>Arquitetura & Separação em Camadas</h2>
+            <p>Mapeamento visual da infraestrutura real: Bare-Metal, Firewall UFW, VPN WireGuard e Containers Docker</p>
+        </div>
+
+        <div class="blueprint-layers">
+
+            <!-- Camada 1: Borda de Rede & VPN WireGuard -->
+            <div class="layer-box">
+                <div class="layer-title">
+                    <h3>🛡️ Borda de Rede & Acesso Remoto</h3>
+                    <span class="layer-tag">Interface wg0</span>
+                </div>
+                <div class="service-nodes">
+                    <div class="node-item">
+                        <h4>🔑 WireGuard VPN</h4>
+                        <p>Instalado no host bare-metal (serviço <code>wg-quick@wg0</code>). Único ponto de entrada externo exposto na porta <code>51820/udp</code>.</p>
+                        <span class="node-status">✓ Rede 10.0.0.0/24</span>
+                    </div>
+
+                    <div class="node-item">
+                        <h4>🧱 Firewall UFW</h4>
+                        <p>Política padrão <em>DROP INPUT / ALLOW OUTPUT</em>. Portas de gestão acessíveis apenas pela LAN <code>192.168.0.0/24</code> ou pelo túnel WireGuard.</p>
+                        <span class="node-status">✓ Zero Confiança Externa</span>
+                    </div>
+
+                    <div class="node-item">
+                        <h4>🌐 Netplan & IP Estático</h4>
+                        <p>Endereçamento IPv4 estático previsível configurado no host para garantir estabilidade dos roteamentos e túneis.</p>
+                        <span class="node-status">✓ IP Estático LAN</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Camada 2: Host Bare-Metal (Sistema & Hardening) -->
+            <div class="layer-box">
+                <div class="layer-title">
+                    <h3>🖥️ Host Bare-Metal (Ubuntu Server)</h3>
+                    <span class="layer-tag">Sistema Base</span>
+                </div>
+                <div class="service-nodes">
+                    <div class="node-item">
+                        <h4>🔒 Hardening OpenSSH</h4>
+                        <p>Autenticação estritamente por chave pública. Login root e senhas desabilitados. Banner customizado e acesso via usuário <code>sysadmin</code>.</p>
+                        <span class="node-status">✓ Porta 22/tcp Restrita</span>
+                    </div>
+
+                    <div class="node-item">
+                        <h4>📊 Cockpit (Host)</h4>
+                        <p>Painel nativo em HTTPS (<code>9090/tcp</code>) para administração do Ubuntu Server, monitoramento de disco, RAM, CPU e journald logs.</p>
+                        <span class="node-status">✓ HTTPS LAN + VPN</span>
+                    </div>
+
+                    <div class="node-item">
+                        <h4>📈 CLI & Telemetria</h4>
+                        <p>Ferramentas instaladas para diagnóstico rápido: <code>btop</code>, <code>lm-sensors</code>, Docker CLI e MOTD em <code>/etc/update-motd.d/20-server-info</code>.</p>
+                        <span class="node-status">✓ Monitoramento Ativo</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Camada 3: Armazenamento e Padrão /srv -->
+            <div class="layer-box">
+                <div class="layer-title">
+                    <h3>🗄️ Estrutura /srv & Armazenamento</h3>
+                    <span class="layer-tag">Storage & RAID</span>
+                </div>
+                <div class="service-nodes">
+                    <div class="node-item">
+                        <h4>📁 Hierarquia /srv</h4>
+                        <p>Separação rígida de privilégios: <code>/srv/backup</code> e <code>/srv/scripts</code> sob propriedade do <code>root</code>. <code>/srv/docker</code>, <code>/srv/dados</code> e <code>/srv/documentation</code> sob <code>sysadmin</code>.</p>
+                        <span class="node-status">✓ Menor Privilégio</span>
+                    </div>
+
+                    <div class="node-item">
+                        <h4>💾 Planejamento de Discos</h4>
+                        <p>HDA para dados de produção e HDB para backups. RAID gerenciado pelo Ubuntu Server no host, mantendo os containers desacoplados do RAID.</p>
+                        <span class="node-status">✓ HDA / HDB / RAID</span>
+                    </div>
+
+                    <div class="node-item">
+                        <h4>📦 Padrão de Serviço</h4>
+                        <p>Estrutura padronizada por container: <code>compose.yml</code>, <code>.env</code>, <code>data/</code>, <code>logs/</code> e <code>backup/</code>.</p>
+                        <span class="node-status">✓ Estrutura Limpa</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Camada 4: Aplicações Conteinerizadas (Docker) -->
+            <div class="layer-box">
+                <div class="layer-title">
+                    <h3>🐳 Serviços em Containers (Docker)</h3>
+                    <span class="layer-tag">Runtime & Apps</span>
+                </div>
+                <div class="service-nodes">
+                    <div class="node-item">
+                        <h4>🧭 Portainer</h4>
+                        <p>Gerenciamento visual dos containers via Docker Compose. Dados persistidos em <code>/srv/docker/portainer/data</code>. Portas <code>9443/tcp</code> e <code>9000/tcp</code>.</p>
+                        <span class="node-status">✓ Compose Gerenciado</span>
+                    </div>
+
+                    <div class="node-item">
+                        <h4>🌐 Apache Web Server</h4>
+                        <p>Servidor HTTP conteinerizado para self-hosting do portfólio e projetos estáticos, com autonomia total de armazenamento.</p>
+                        <span class="node-status">✓ Self-Hosting</span>
+                    </div>
+
+                    <div class="node-item">
+                        <h4>📂 Samba (SMB Server)</h4>
+                        <p>Serviço de arquivos restrito estritamente à LAN (<code>445/tcp</code>). Usuários individuais criados para backup de fotos do celular da família.</p>
+                        <span class="node-status">✓ LAN Only Guard</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Tabela de Regras do Firewall (UFW) -->
+    <section class="ufw-wrapper reveal">
+        <div class="ufw-header">
+            <h3>Firewall (UFW) & Isolamento de Portas</h3>
+            <span class="ufw-policy">Política Padrão: DROP Incoming • ALLOW Outgoing</span>
+        </div>
+
+        <div class="ufw-table-container">
+            <table class="ufw-table">
+                <thead>
+                    <tr>
+                        <th>Porta / Protocolo</th>
+                        <th>Serviço</th>
+                        <th>Origem Autorizada</th>
+                        <th>Ação</th>
+                        <th>Propósito Técnico</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="port-tag">51820/udp</span></td>
+                        <td><strong>WireGuard</strong></td>
+                        <td>Qualquer origem (IPv4 / IPv6)</td>
+                        <td><span class="action-allow">ALLOW IN</span></td>
+                        <td>Única porta exposta à Internet para estabelecimento da VPN remota</td>
+                    </tr>
+                    <tr>
+                        <td><span class="port-tag">22/tcp</span></td>
+                        <td><strong>OpenSSH</strong></td>
+                        <td>LAN <code>192.168.0.0/24</code> & VPN <code>10.0.0.0/24</code></td>
+                        <td><span class="action-allow">ALLOW IN</span></td>
+                        <td>Acesso administrativo exclusivo por chaves SSH (root desativado)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="port-tag">9090/tcp</span></td>
+                        <td><strong>Cockpit</strong></td>
+                        <td>LAN <code>192.168.0.0/24</code> & VPN <code>10.0.0.0/24</code></td>
+                        <td><span class="action-allow">ALLOW IN</span></td>
+                        <td>Painel HTTPS de telemetria do sistema operacional</td>
+                    </tr>
+                    <tr>
+                        <td><span class="port-tag">9443/tcp</span></td>
+                        <td><strong>Portainer</strong></td>
+                        <td>LAN <code>192.168.0.0/24</code> & VPN <code>10.0.0.0/24</code></td>
+                        <td><span class="action-allow">ALLOW IN</span></td>
+                        <td>Interface HTTPS de gerenciamento dos containers Docker</td>
+                    </tr>
+                    <tr>
+                        <td><span class="port-tag">445/tcp</span></td>
+                        <td><strong>Samba (SMB)</strong></td>
+                        <td>Estritamente LAN <code>192.168.0.0/24</code></td>
+                        <td><span class="action-allow">ALLOW IN</span></td>
+                        <td>Compartilhamento de arquivos e backup móvel local (bloqueado na VPN)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Detalhamento dos Pilares Técnicos -->
+    <div class="section-title-wrap reveal">
+        <h2>Decisões Técnicas</h2>
+    </div>
+
+    <section class="homelab-details">
+
+        <!-- Card 1: WireGuard -->
+        <article class="detail-card reveal">
+            <div class="detail-card-header">
+                <div class="icon-wrapper">🔑</div>
+                <h3>Acesso Remoto Seguro via WireGuard</h3>
+                <div class="badge-group">
+                    <span class="badge-pill highlight">WireGuard</span>
+                    <span class="badge-pill">Rede 10.0.0.0/24</span>
+                    <span class="badge-pill">wg-quick</span>
+                </div>
+            </div>
+            <div class="detail-card-body">
+                <p>
+                    Em vez de abrir portas administrativas diretamente para a Internet, a gestão externa é 100% condicionada ao fechamento prévio de túnel VPN criptografado com o WireGuard.
+                </p>
+                <ul>
+                    <li>Serviço <code>wg-quick@wg0</code> ativo no boot e configurado diretamente no host bare-metal;</li>
+                    <li>Sub-rede privada <code>10.0.0.0/24</code> permitindo alcançar SSH, Cockpit e Portainer com segurança corporativa;</li>
+                    <li>Redução drástica de superfície de ataque, neutralizando varreduras de portas e tentativas de brute-force da web.</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Card 2: Hardening & Usuários -->
+        <article class="detail-card reveal">
+            <div class="detail-card-header">
+                <div class="icon-wrapper">🔒</div>
+                <h3>Hardening de Acesso & Menor Privilégio</h3>
+                <div class="badge-group">
+                    <span class="badge-pill highlight">Hardening</span>
+                    <span class="badge-pill">OpenSSH</span>
+                    <span class="badge-pill">sysadmin</span>
+                </div>
+            </div>
+            <div class="detail-card-body">
+                <p>
+                    O acesso administrativo é centralizado no usuário <code>sysadmin</code> (grupos <code>sudo</code>, <code>docker</code>, <code>lxd</code>), com isolamento rigoroso de credenciais.
+                </p>
+                <ul>
+                    <li>Autenticação OpenSSH configurada exclusivamente com chaves públicas (chaves Ed25519/RSA);</li>
+                    <li><code>PasswordAuthentication no</code> e <code>PermitRootLogin no</code> ativos no <code>sshd_config</code>;</li>
+                    <li>Banner legal informativo em <code>/etc/ssh/banner</code> e MOTD personalizado com status do sistema;</li>
+                    <li>Pastas críticas <code>/srv/backup</code> e <code>/srv/scripts</code> blindadas sob permissão exclusiva do <code>root</code>.</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Card 3: Estrutura /srv & Padrão Docker -->
+        <article class="detail-card reveal">
+            <div class="detail-card-header">
+                <div class="icon-wrapper">📦</div>
+                <h3>Padronização de Diretórios sob /srv</h3>
+                <div class="badge-group">
+                    <span class="badge-pill highlight">FHS /srv</span>
+                    <span class="badge-pill">Compose</span>
+                    <span class="badge-pill">Automação</span>
+                </div>
+            </div>
+            <div class="detail-card-body">
+                <p>
+                    Seguindo o padrão de boas práticas do Linux (FHS), a raiz <code>/srv</code> centraliza todos os dados de serviços do servidor, evitando fragmentação e facilitando rotinas de backup.
+                </p>
+                <div class="dir-tree">
+                    /srv/<br>
+                    ├── docker/ <br>
+                    ├── dados/ <br>
+                    ├── backup/ [root:root]<br>
+                    ├── scripts/ [root:root]<br>
+                    └── documentation/
+                </div>
+                <ul>
+                    <li>Cada serviço possui sua pasta em <code>/srv/docker/&lt;app&gt;/</code> contendo <code>compose.yml</code>, <code>.env</code>, <code>data/</code>, <code>logs/</code> e <code>backup/</code>;</li>
+                    <li>Containers Docker são executados desacoplados da camada de RAID gerenciada pelo SO.</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Card 4: Portainer & Cockpit -->
+        <article class="detail-card reveal">
+            <div class="detail-card-header">
+                <div class="icon-wrapper">📊</div>
+                <h3>Observabilidade: Cockpit & Portainer</h3>
+                <div class="badge-group">
+                    <span class="badge-pill highlight">Cockpit</span>
+                    <span class="badge-pill">Portainer</span>
+                    <span class="badge-pill">btop</span>
+                </div>
+            </div>
+            <div class="detail-card-body">
+                <p>
+                    A observabilidade do ambiente é distribuída em duas ferramentas dedicadas para garantir visão clara do hardware e das aplicações.
+                </p>
+                <ul>
+                    <li><strong>Cockpit (Host):</strong> Roda na porta <code>9090/tcp</code> em HTTPS para administração do Ubuntu Server, inspeção de hardware, logs do systemd e controle de atualizações;</li>
+                    <li><strong>Portainer (Docker):</strong> Executado em container na porta <code>9443/tcp</code> (HTTPS) com persistência em <code>/srv/docker/portainer/data</code>;</li>
+                    <li><strong>CLI rápida:</strong> Uso de <code>btop</code> e <code>lm-sensors</code> via terminal para auditoria de temperatura e CPU governor <em>performance</em>.</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Card 5: Samba Storage Familiar -->
+        <article class="detail-card reveal">
+            <div class="detail-card-header">
+                <div class="icon-wrapper">📁</div>
+                <h3>Samba Server & Backup Familiar (LAN-Only)</h3>
+                <div class="badge-group">
+                    <span class="badge-pill highlight">Samba SMB</span>
+                    <span class="badge-pill">445/tcp</span>
+                    <span class="badge-pill">LAN Exclusivo</span>
+                </div>
+            </div>
+            <div class="detail-card-body">
+                <p>
+                    Solução de nuvem privada doméstica para centralizar o backup de fotos e vídeos dos smartphones de todos da casa, sem cobranças recorrentes e com privacidade integral.
+                </p>
+                <ul>
+                    <li>Contas individuais de usuários com controle estrito de diretório e permissões para cada membro da família;</li>
+                    <li>Regra de firewall no UFW restringe o tráfego estritamente à rede local <code>192.168.0.0/24</code>;</li>
+                    <li>Totalmente isolado do tráfego da VPN WireGuard e da Internet pública para prevenir vazamentos.</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Card 6: Apache Self-Hosting -->
+        <article class="detail-card reveal">
+            <div class="detail-card-header">
+                <div class="icon-wrapper">🌐</div>
+                <h3>Apache & Self-Hosting do Portfólio</h3>
+                <div class="badge-group">
+                    <span class="badge-pill highlight">Apache HTTP</span>
+                    <span class="badge-pill">Docker</span>
+                    <span class="badge-pill">Autonomia</span>
+                </div>
+            </div>
+            <div class="detail-card-body">
+                <p>
+                    O portfólio pessoal e os projetos web são hospedados diretamente no próprio servidor físico ThinkPad L14 (self-hosted).
+                </p>
+                <ul>
+                    <li>Servidor web Apache rodando conteinerizado sob o Docker Engine;</li>
+                    <li>Autonomia de infraestrutura, eliminando a dependência de plataformas proprietárias de terceiros;</li>
+                    <li>Ciclo de vida gerenciado via Docker Compose sob a estrutura <code>/srv/docker/</code>.</li>
+                </ul>
+            </div>
+        </article>
+
+    </section>
+
+    <!-- Bloco de Terminal Interativo / Registro de Decisões -->
+    <section class="terminal-block reveal">
+        <div class="terminal-top-bar">
+            <div class="terminal-dots">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+            </div>
+            <span class="terminal-title">sysadmin@server: /srv/documentation/decisoes.md</span>
+        </div>
+        <div class="terminal-content">
+            <span class="terminal-prompt">sysadmin@server:~$</span> cat /srv/documentation/decisoes.md<br>
+            <span style="color: var(--destaque-botao);"># 2026-06-21 - Registro de Decisões de Arquitetura</span><br><br>
+            <strong>Servidor:</strong><br>
+            * Lenovo ThinkPad L14 Gen 2 (Intel Core i7-1185G7)<br>
+            * Ubuntu Server 26.04 LTS (IP estático Netplan, Governor: performance)<br>
+            * Suspensão, hibernação, fechamento de tampa e botões físicos desabilitados<br><br>
+            <strong>SSH & Segurança:</strong><br>
+            * Chave pública habilitada | Senha desabilitada | Root desabilitado | Usuário: sysadmin<br><br>
+            <strong>WireGuard:</strong><br>
+            * Interface wg0 (10.0.0.0/24) | Serviço wg-quick@wg0 habilitado no boot<br>
+            * Acesso SSH e gestão condicionados ao túnel WireGuard<br><br>
+            <strong>Docker & Estrutura /srv:</strong><br>
+            * /srv/docker, /srv/dados, /srv/backup, /srv/scripts, /srv/documentation<br>
+            * Padrão: compose.yml, .env, data/, logs/, backup/<br>
+            * Cockpit (9090/tcp HTTPS no host) | Portainer (9443/tcp HTTPS em container)<br>
+            * UFW: Default DROP IN, ALLOW OUT | Única porta pública: 51820/udp (WireGuard)<br>
+        </div>
+    </section>
+
+    <!-- Footer consistente -->
+    <footer style="margin-top: 4rem; text-align: center; border-top: 1px solid var(--borda-card); padding-top: 2rem;">
+        <p style="color: var(--cor-texto-muted); font-size: 0.9rem;">
+            Aglemar Reis • Servidor Pessoal & Infraestrutura Linux •
+            <a href="index.html" style="color: var(--destaque-botao); text-decoration: none;">Voltar ao Portfólio</a>
+        </p>
+    </footer>
+
+</div>
+</body>
+</html>
