@@ -7,9 +7,13 @@ Options -Indexes
 </FilesMatch>
 
 # 3. Bloqueia arquivos sensíveis e backups
-<FilesMatch "\.(env|env\..*|bak|config|sql|log|sh)$">
+<FilesMatch "\.(env|env\..*|bak|config|sql|log|sh|py|pyc|service|conf)$">
     Require all denied
 </FilesMatch>
 
 # 4. Bloqueia acesso ao repositório Git simulando arquivo inexistente
 RedirectMatch 404 /\.git
+
+# 5. Serviço de contato (Resend): nada da pasta contato/ é público.
+# O formulário usa /api/contato, atendido via ProxyPass, não esta pasta.
+RedirectMatch 404 ^/contato(/|$)
