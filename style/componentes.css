@@ -1,16 +1,28 @@
 /*IMAGEM DE PERFIL*/
 .img-perfil {
+    height: auto;
     border-radius: 50%;
     width: clamp(200px, 50%, 350px);
+    object-fit: cover;
 }
 
-/*DEMAIS IMAGEM GENÉRICAS*/
+/*DEMAIS IMAGENS GENÉRICAS*/
 .img-card {
+    height: auto;
     width: clamp(250px, 93%, 450px);
     border-radius: 1rem;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--borda-card);
+    box-shadow: var(--sombra-card);
     aspect-ratio: 1.4;
+    object-fit: cover;
     margin: 1rem 0;
+    transition: var(--transicao-fluida);
+}
+
+.secao:hover .img-card {
+    border-color: var(--borda-card-hover);
+    box-shadow: var(--sombra-card-hover);
+    transform: translateY(-2px);
 }
 
 /*ITENS COM ALTA REPETIVIDADE OU IMUTÁVEIS*/

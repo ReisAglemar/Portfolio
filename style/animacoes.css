@@ -1,0 +1,131 @@
+/*==================================================
+   ANIMAÇÕES & MICRO-INTERAÇÕES FLUIDAS
+  ==================================================*/
+
+/* 1. Revelação Suave ao Rolar (Scroll Reveal Seguro) */
+.reveal {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+/* Oculta suavemente apenas quando o JS estiver carregado e o elemento ainda não tiver entrado na tela */
+html.js-ready .reveal:not(.revealed) {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+html.js-ready .reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 2. Animação de Pulso & Glow na Foto de Perfil */
+@keyframes profilePulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(187, 244, 38, 0.4),
+                    0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+    70% {
+        box-shadow: 0 0 0 16px rgba(187, 244, 38, 0),
+                    0 15px 30px rgba(0, 0, 0, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(187, 244, 38, 0),
+                    0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+}
+
+.img-perfil {
+    animation: profilePulse 4s infinite ease-in-out;
+    border: 3px solid var(--destaque-botao);
+    transition: transform var(--transicao-fluida), box-shadow var(--transicao-fluida);
+}
+
+.img-perfil:hover {
+    transform: scale(1.03) rotate(1deg);
+    box-shadow: 0 0 25px var(--destaque-glow), 0 20px 35px rgba(0, 0, 0, 0.6);
+}
+
+/* 3. Efeito no Header Flutuante ao Rolar */
+.header-nav {
+    transition: all var(--transicao-fluida);
+}
+
+.header-nav.nav-scrolled {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background-color: rgba(9, 13, 22, 0.92);
+    border-bottom: 1px solid var(--borda-card);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* 4. Link Ativo na Navegação (ScrollSpy) */
+.header-nav ul li a.active-nav {
+    background-color: var(--destaque-botao) !important;
+    color: var(--texto-botao) !important;
+    box-shadow: var(--sombra-botao) !important;
+    font-weight: var(--peso-titulo);
+}
+
+/* 5. Botão Flutuante Voltar ao Topo */
+#back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--destaque-botao);
+    color: var(--texto-botao);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--sombra-botao);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.9);
+    transition: all var(--transicao-fluida);
+    z-index: 99;
+}
+
+#back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+#back-to-top:hover {
+    background-color: var(--destaque-hover);
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: var(--sombra-botao-hover);
+}
+
+#back-to-top:active {
+    transform: scale(0.95);
+}
+
+/* 6. Acessibilidade: respeita preferências de redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .reveal,
+    html.js-ready .reveal:not(.revealed) {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}

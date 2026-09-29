@@ -19,55 +19,81 @@
     }
 
     /*======== FIM GERAL ========*/
+
     /*========== HEADER CAPA ==========*/
     .intro {
-        max-width: 80%;
+        max-width: 1100px;
         margin: 0 auto;
         display: grid;
         align-items: center;
-        gap: 1rem;
-        grid-template-columns: 1fr 1.5fr;
+        gap: 2rem;
+        grid-template-columns: 1.2fr 1fr;
         grid-template-areas:
-        "nome foto"
-        "descricao foto"
-        "menu menu";
+            "nome foto"
+            "descricao foto"
+            "menu menu";
+        padding-bottom: 2rem;
     }
 
     .intro figure {
         padding: 0;
+        justify-content: center;
     }
 
     #nome {
         grid-area: nome;
     }
 
+    .intro h1 {
+        text-align: left;
+        padding-top: 2rem;
+        font-size: 3rem;
+    }
+
+    .intro h2 {
+        text-align: left;
+        padding-bottom: 1.5rem;
+    }
+
     #foto {
         grid-area: foto;
-
     }
 
     #descricao {
         grid-area: descricao;
+    }
 
+    .intro p {
+        text-align: left;
+        text-indent: 0;
     }
 
     #menu {
         grid-area: menu;
+        margin-top: 1rem;
+    }
+
+    #menu ul {
+        justify-content: flex-start;
+        gap: 1.2rem;
+        padding: 1.5rem 0;
     }
 
     /*========== FIM HEADER CAPA ==========*/
+
     /*========== MAIN CONHECIMENTOS ==========*/
     #conhecimentos {
-        max-width: clamp(800px, 60%, 1200px);
+        max-width: 1100px;
         margin: 0 auto;
+        padding: 0 1.5rem;
         display: grid;
         gap: 2rem;
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
-        "titulo-conhecimento titulo-conhecimento"
-        "html css"
-        "js java"
-        "git linux";
+            "titulo-conhecimento titulo-conhecimento"
+            "html css"
+            "js java"
+            "git linux";
     }
 
     #titulo-conhecimentos {
@@ -98,15 +124,8 @@
         grid-area: linux;
     }
 
-    #conhecimentos .altera-bg {
-        background-color: var(--titulo-principal-claro);
-    }
-
-    #conhecimentos .altera-bg h3,
-    #conhecimentos .altera-bg p,
-    #conhecimentos .altera-bg p strong,
-    #conhecimentos .altera-bg ul li {
-        color: var(--cor-texto-escuro);
+    #conhecimentos .secao {
+        margin-bottom: 0;
     }
 
     #conhecimentos h3 {
@@ -115,20 +134,20 @@
     }
 
     /*========== FIM MAIN CONHECIMENTOS ==========*/
+
     /*========== MAIN PROJETOS ==========*/
     #projetos {
-        background-color: var(--fundo-principal-escuro);
-        max-width: 100%;
+        max-width: 1200px;
         margin: 0 auto;
-        padding: 0 10% 5rem 10%;
+        padding: 2rem 2rem 5rem;
         display: grid;
-        column-gap: 7rem;
-        row-gap: 2rem;
+        column-gap: 2.5rem;
+        row-gap: 2.5rem;
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
-        "titulo-projeto titulo-projeto"
-        "super-trunfo garage-database"
-        "portfolio novo-projeto";
+            "titulo-projeto titulo-projeto"
+            "super-trunfo garage-database"
+            "portfolio novo-projeto";
     }
 
     #titulo-projetos {
@@ -151,28 +170,10 @@
         grid-area: novo-projeto;
     }
 
-    #projetos h2,
-    #projetos h3,
-    #projetos p,
-    #projetos ul li,
-    #projetos hr {
-        color: var(--cor-texto-claro);
-    }
-
-    #projetos hr {
-        background-color: var(--linhas-escuro);
-    }
-
-    #projetos nav a {
-        background-color: var(--destaque-botao);
-        color: var(--fundo-principal-escuro);
-        border: 1px solid var(--destaque-botao);
-        box-shadow: 0 0 8px var(--destaque-botao);
-    }
-
-    #projetos p strong {
-        color: var(--destaque-botao);
-        font-weight: var(--peso-titulo);
+    #projetos .secao {
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
     }
 
     #projetos h3 {
@@ -180,57 +181,67 @@
         font-weight: var(--peso-titulo);
     }
 
-    #projetos section .overflow{
-        padding: 2rem 0;
-        height: 500px;
-        overflow-y: scroll;
+    #projetos section .overflow {
+        padding: 1rem 0.5rem 1rem 0;
+        height: 480px;
+        overflow-y: auto;
         overflow-x: hidden;
         scrollbar-width: thin;
         scrollbar-color: var(--destaque-botao) var(--fundo-secundario-escuro);
     }
+
+    /* Estilização da barra de rolagem nos projetos */
+    #projetos section .overflow::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    #projetos section .overflow::-webkit-scrollbar-track {
+        background: var(--fundo-secundario-escuro);
+        border-radius: 4px;
+    }
+
+    #projetos section .overflow::-webkit-scrollbar-thumb {
+        background: var(--destaque-botao);
+        border-radius: 4px;
+    }
+
     /*========== FIM MAIN PROJETOS ==========*/
 
     /*========== FOOTER ==========*/
-
-    .container-footer input,
-    textarea,
-    button {
-        min-width: 40vw;
+    .container-footer h2 {
+        padding-top: 4rem;
     }
 
-    .container-footer h2{
-        padding-top: 5rem;
+    .container-footer form {
+        padding-bottom: 4rem;
     }
-
-    .container-footer form{
-        padding-bottom: 5rem;
-    }
-
     /*========== FIM FOOTER ==========*/
 
-    /*======== TODOS OS :HOVER SERÃO TRATADOS AQUI ========*/
-    /*objetivo: garantir que no mobile não tenha hover*/
+    /*======== HOVER & MICRO-INTERAÇÕES NO DESKTOP ========*/
     @media (hover: hover) and (pointer: fine) {
 
-        .header-nav ul li a,
-        .intro nav ul li a,
-        #projetos nav a,
-        .container-footer button{
-            transition: background-color 0.2s ease-in-out;
+        .header-nav ul li a:hover {
+            color: var(--destaque-botao);
+            background-color: rgba(187, 244, 38, 0.1);
         }
 
-        .header-nav ul li a:hover,
         .intro nav ul li a:hover {
+            transform: translateY(-2px);
             background-color: var(--destaque-botao);
-            color: var(--fundo-principal-escuro);
-            box-shadow: 0 0 8px var(--destaque-botao);
-            opacity: 1;
+            color: var(--texto-botao);
+            box-shadow: var(--sombra-botao-hover);
         }
 
-        #projetos nav a:hover,
-        .container-footer button:hover{
-            background-color: var(--fundo-principal-escuro);
-            color: var(--cor-texto-claro);
+        .secao nav a:hover {
+            transform: translateY(-2px);
+            background-color: var(--destaque-hover);
+            box-shadow: var(--sombra-botao-hover);
+        }
+
+        .container-footer button:hover {
+            transform: translateY(-2px);
+            background-color: var(--destaque-hover);
+            box-shadow: var(--sombra-botao-hover);
         }
     }
 }

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nota 01 de Notas de Campo: o que quebrou ao levar o myDDNS do ambiente de teste para o servidor de produção, mesmo com Ubuntu nos dois.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/agora.css">
+    <link rel="stylesheet" href="style/notas.css">
+    <title>O abismo entre o teste e a produção | Notas de Campo | Reis A.</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+<div class="agora-container">
+
+    <!-- Header / Voltar -->
+    <header class="agora-header-top">
+        <a href="notas.html" class="btn-voltar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Notas de Campo
+        </a>
+
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            Nota 01 • 7 min de leitura
+        </div>
+    </header>
+
+    <article class="nota" id="nota-01">
+
+        <header class="nota-cabecalho reveal">
+            <span class="nota-numero">Nota 01</span>
+            <h1>O abismo entre o teste e a produção</h1>
+            <div class="nota-meta">
+                <span>📅 29 de setembro de 2026</span>
+                <span>⏱️ 7 min de leitura</span>
+            </div>
+            <div class="badge-group">
+                <span class="badge-pill highlight">Produção</span>
+                <span class="badge-pill">Linux</span>
+                <span class="badge-pill">Cron</span>
+                <span class="badge-pill">Python</span>
+                <span class="badge-pill">Cloudflare API</span>
+            </div>
+        </header>
+
+        <!-- 1. Contexto -->
+        <section class="nota-secao reveal">
+            <h2>O que eu construí</h2>
+            <p>
+                Meu IP de saída muda. Quando isso acontece, qualquer coisa que dependa de um nome apontando para a minha casa
+                deixa de responder. Então escrevi o <strong>myDDNS</strong>, uma aplicação em Python que resolve isso sozinha:
+                ela <strong>descobre o meu IP público, compara com o último conhecido e, se mudou, atualiza o registro DNS
+                na Cloudflare</strong> e me avisa por e-mail.
+            </p>
+            <p>
+                Parece pouco, mas o problema tem várias peças: consumo de API (para descobrir o IP, falar com a Cloudflare
+                e enviar o e-mail), estado persistido em arquivo entre execuções, agendamento com cron e, no fim, um servidor
+                rodando tudo sem ninguém olhando. Fiz o projeto sem dependências externas, só módulos nativos do Python,
+                justamente para simplificar o deploy.
+            </p>
+
+            <div class="fluxo" aria-label="Fluxo da aplicação">
+                <div class="fluxo-passo">
+                    <span class="fluxo-icone">⏰</span>
+                    <strong>Cron</strong>
+                    <small>dispara periodicamente</small>
+                </div>
+                <span class="fluxo-seta" aria-hidden="true">→</span>
+                <div class="fluxo-passo">
+                    <span class="fluxo-icone">🔍</span>
+                    <strong>Detecta o IP</strong>
+                    <small>consulta uma API pública</small>
+                </div>
+                <span class="fluxo-seta" aria-hidden="true">→</span>
+                <div class="fluxo-passo">
+                    <span class="fluxo-icone">⚖️</span>
+                    <strong>Compara</strong>
+                    <small>com o IP salvo em arquivo</small>
+                </div>
+                <span class="fluxo-seta" aria-hidden="true">→</span>
+                <div class="fluxo-passo">
+                    <span class="fluxo-icone">☁️</span>
+                    <strong>Atualiza</strong>
+                    <small>Cloudflare, cache e e-mail</small>
+                </div>
+            </div>
+
+            <p class="nota-link-wrap">
+                <a class="btn-repo" href="https://github.com/ReisAglemar/myDDNS" target="_blank" rel="noopener noreferrer">
+                    Ver myDDNS no GitHub
+                </a>
+            </p>
+        </section>
+
+        <!-- 2. Falsa segurança -->
+        <section class="nota-secao reveal">
+            <h2>"Mas é o mesmo sistema operacional"</h2>
+            <p>
+                Desenvolvi e testei tudo no meu computador, que roda <strong>Ubuntu</strong>.
+                O servidor onde a aplicação ia viver também roda <strong>Ubuntu</strong>.
+                Eu estava tranquilo: mesma distribuição, mesmos comandos, mesmo shell. A distância entre fabricação
+                e produção, pensei, era mínima.
+            </p>
+            <p>
+                Não era. E o mais interessante é que <strong>quanto mais parecidos os ambientes, mais perigosa é a confiança.</strong>
+                Com sistemas muito diferentes você já espera problemas. Com dois Ubuntu, você deixa de checar as premissas.
+            </p>
+
+            <blockquote class="nota-destaque">
+                O abismo não estava no sistema operacional. Estava em tudo o que eu tinha assumido sem perceber.
+            </blockquote>
+        </section>
+
+        <!-- 3. Linha do tempo -->
+        <section class="nota-secao reveal">
+            <h2>O dia do deploy, commit a commit</h2>
+            <p>
+                O histórico do repositório conta essa história melhor do que a minha memória.
+                Foram <strong>sete correções em um único dia (27/07)</strong>, todas para fazer funcionar em produção
+                o que já funcionava no meu computador:
+            </p>
+
+            <ol class="timeline">
+                <li class="timeline-item">
+                    <span class="timeline-marca" aria-hidden="true"></span>
+                    <span class="timeline-titulo">Variáveis não inicializadas</span>
+                    <p>
+                        Se a leitura do <code>.env</code> falhava, o bloco de tratamento de erro tentava usar variáveis
+                        que nem existiam e estourava um <code>UnboundLocalError</code>. Solução: inicializar tudo antes do <code>try</code>.
+                    </p>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marca" aria-hidden="true"></span>
+                    <span class="timeline-titulo">Caminhos que dependiam de onde eu estava</span>
+                    <p>
+                        Dois commits para resolver a mesma raiz: o cache e o <code>.env</code> eram abertos por caminho relativo.
+                        No terminal, dentro da pasta do projeto, funcionava. Fora dela, não. A correção foi resolver o
+                        diretório a partir do próprio arquivo, com <code>Path(__file__).resolve().parent</code>.
+                    </p>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marca" aria-hidden="true"></span>
+                    <span class="timeline-titulo">Shebang</span>
+                    <p>
+                        Adicionei <code>#!/usr/bin/env python3</code> ao topo do <code>myDDNS.py</code> para o script poder ser
+                        executado direto, como o agendador faz.
+                    </p>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marca" aria-hidden="true"></span>
+                    <span class="timeline-titulo">O cache "sumia"</span>
+                    <p>
+                        A mensagem do commit resume: <em>"o local do sudo cron é diferente do local do cache"</em>.
+                        O teste de existência do arquivo de cache ainda usava caminho relativo, então o cron não o encontrava,
+                        achava que sempre era a primeira execução e atualizava tudo de novo.
+                    </p>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-marca" aria-hidden="true"></span>
+                    <span class="timeline-titulo">O erro dentro do tratamento de erro</span>
+                    <p>
+                        Se o envio do e-mail de alerta falhasse, dentro do tratamento de outra falha, nada capturava essa segunda
+                        exceção. Envolvi o envio em um novo <code>try/except</code>.
+                    </p>
+                </li>
+            </ol>
+        </section>
+
+        <!-- 4. Onde quebrou -->
+        <section class="nota-secao reveal">
+            <h2>Onde quebrou</h2>
+            <p>
+                Olhando para trás, os problemas cabem em três famílias. Todas com a mesma raiz.
+            </p>
+
+            <div class="problemas">
+
+                <div class="problema-card">
+                    <div class="icon-wrapper">🔐</div>
+                    <h3>Permissões</h3>
+                    <p>
+                        No meu computador eu sou o dono de tudo. No servidor, cada coisa tem dono, grupo e modo.
+                        Quem executa a aplicação, quem lê o <code>.env</code> e quem escreve o cache
+                        deixaram de ser a mesma pessoa.
+                    </p>
+                    <span class="problema-licao">Lição: teste como o usuário que vai executar de verdade.</span>
+                </div>
+
+                <div class="problema-card">
+                    <div class="icon-wrapper">🗺️</div>
+                    <h3>Paths e falta de dinamismo</h3>
+                    <p>
+                        Caminhos que funcionavam por acaso, relativos ao diretório onde eu estava. O cron, rodando via
+                        <code>sudo</code>, tem outro diretório de trabalho, e cada arquivo aberto do jeito antigo virou uma falha.
+                    </p>
+                    <span class="problema-licao">Lição: o cron não é o seu terminal.</span>
+                </div>
+
+                <div class="problema-card">
+                    <div class="icon-wrapper">🪞</div>
+                    <h3>O erro que esconde o erro</h3>
+                    <p>
+                        Uma falha ao ler o <code>.env</code> virava outra falha no tratamento, e uma falha no e-mail de alerta
+                        virava uma terceira, sem ninguém para capturar. O tratamento de erro também é código que precisa de teste.
+                    </p>
+                    <span class="problema-licao">Lição: o caminho de erro precisa ser testado como o caminho feliz.</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. Tabela -->
+        <section class="ufw-wrapper reveal">
+            <div class="ufw-header">
+                <h2>Mesmo Ubuntu, premissas diferentes</h2>
+            </div>
+
+            <div class="ufw-table-container">
+                <table class="ufw-table">
+                    <thead>
+                        <tr>
+                            <th>Aspecto</th>
+                            <th>Meu ambiente de teste</th>
+                            <th>Servidor de produção</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Quem executa</strong></td>
+                            <td>Eu, em sessão interativa</td>
+                            <td>Cron via sudo, sem sessão nem terminal</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Permissões</strong></td>
+                            <td>Sou dono de tudo</td>
+                            <td>Dono, grupo e modo importam</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Diretório atual</strong></td>
+                            <td>A pasta do projeto</td>
+                            <td>Definido pelo agendador</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Caminho do cache e do .env</strong></td>
+                            <td>Relativo, funciona por acaso</td>
+                            <td>Precisa ser resolvido a partir do próprio script</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Quando dá erro</strong></td>
+                            <td>Vejo na hora, na tela</td>
+                            <td>Ninguém vê, a menos que exista registro</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 6. Código antes/depois -->
+        <section class="nota-secao reveal">
+            <h2>A correção que mais se repetiu</h2>
+            <p>
+                Trocar "o arquivo que está aqui, onde eu estou" por "o arquivo que está ao lado do código". Em <code>cache.py</code>:
+            </p>
+
+            <div class="terminal-block">
+                <div class="terminal-top-bar">
+                    <div class="terminal-dots">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                    </div>
+                    <span class="terminal-title">cache.py</span>
+                </div>
+                <div class="terminal-content">
+                    <span class="terminal-comentario"># diretório base absoluto do módulo, resolvido a partir do próprio arquivo</span><br>
+                    <span class="diff-add">+ DIRETORIO = Path(__file__).resolve().parent</span><br><br>
+                    <span class="diff-del">- with open(NOME_ARQUIVO, 'r', encoding='utf-8') as arquivo:</span><br>
+                    <span class="diff-add">+ caminhoAbsoluto = DIRETORIO / NOME_ARQUIVO</span><br>
+                    <span class="diff-add">+ with open(caminhoAbsoluto, 'r', encoding='utf-8') as arquivo:</span>
+                </div>
+            </div>
+
+            <p>
+                Uma linha de diferença, e a aplicação deixa de depender de onde foi chamada.
+            </p>
+        </section>
+
+        <!-- 7. O que levo -->
+        <section class="detail-card nota-licoes reveal">
+            <div class="detail-card-header">
+                <div class="icon-wrapper">🧭</div>
+                <h2>O que levo para os próximos projetos</h2>
+                <div class="badge-group">
+                    <span class="badge-pill highlight">Checklist</span>
+                    <span class="badge-pill">Produção</span>
+                </div>
+            </div>
+            <div class="detail-card-body">
+                <ul>
+                    <li>Explicitar tudo o que hoje é implícito: usuário, diretório, caminhos e variáveis;</li>
+                    <li>Resolver caminhos a partir do próprio código, nunca de onde a aplicação foi chamada;</li>
+                    <li>Separar configuração e segredos do código, com permissões restritas ao usuário que os usa;</li>
+                    <li>Testar como o usuário que vai executar, do jeito que vai executar;</li>
+                    <li>Testar também o caminho de erro, não só o caminho feliz;</li>
+                    <li>Ensaiar o deploy em um ambiente o mais próximo possível do real, antes do real.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 8. Fechamento -->
+        <section class="nota-secao reveal">
+            <h2>O que ficou</h2>
+            <p>
+                Ter um servidor doméstico ajudou a enxergar isso com clareza, porque o erro é meu e o conserto também.
+                A lição principal não é técnica: <strong>"funciona na minha máquina" descreve a máquina, não a aplicação.</strong>
+            </p>
+            <p>
+                Produção não é um lugar onde o código roda. É um lugar onde <strong>cada premissa não declarada vira uma falha</strong>.
+                A distância entre teste e produção nunca é zero, mas ela pode ser conhecida, e conhecê-la é o trabalho.
+            </p>
+            <p class="nota-continua">
+                Uma dessas premissas eu só percebi por ter sido a mais cara. <a href="nota-02.html">Continua na Nota 02 →</a>
+            </p>
+        </section>
+
+    </article>
+
+    <!-- Navegação entre notas -->
+    <nav class="nota-navegacao" aria-label="Navegação entre notas">
+        <span></span>
+        <a href="nota-02.html" class="nav-proxima">
+            <small>Próxima nota →</small>
+            <strong>A cabeça de quem constrói e a de quem mantém</strong>
+        </a>
+    </nav>
+
+    <!-- Footer consistente -->
+    <footer class="notas-footer">
+        <p>
+            Aglemar Reis • Notas de Campo •
+            <a href="notas.html">Todas as notas</a> •
+            <a href="index.html">Portfólio</a>
+        </p>
+    </footer>
+
+</div>
+</body>
+</html>

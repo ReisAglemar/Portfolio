@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns="http://www.w3.org/1999/html">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfólio de Aglemar Reis - Desenvolvedor Full Stack com foco em Backend Java, Spring Boot e Linux.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="style/main.css">
     <title>Reis A.</title>
-    <link rel="icon" type="image/png" href="img/favicon.svg">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <script src="js/main.js" defer></script>
 </head>
 <body>
 <div class="container">
@@ -14,19 +18,14 @@
     <header id="header">
         <nav class="header-nav">
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="#header">Home</a></li>
                 <li><a href="#conhecimentos">Skills</a></li>
                 <li><a href="#projetos">Projetos</a></li>
-
-                <li class="desktop"><a href="#" target="_blank">Artigos</a></li>
-
-                <!--todo fazer a página agora, focando nos aprendizados momentâneos-->
-                <li class="desktop"><a href="#" target="_blank">Agora</a></li>
-
+                <li><a href="notas.html">Notas</a></li>
+                <li><a href="agora.html">Agora</a></li>
                 <li><a href="#footer">Contato</a></li>
-
-                <li><a href="https://github.com/ReisAglemar" target="_blank" class="social">GitHub</a></li>
-                <li><a href="https://www.linkedin.com/in/aglemarreis/" target="_blank" class="social">LinkedIn</a></li>
+                <li><a href="https://github.com/ReisAglemar" target="_blank" rel="noopener noreferrer" class="social">GitHub</a></li>
+                <li><a href="https://www.linkedin.com/in/aglemarreis/" target="_blank" rel="noopener noreferrer" class="social">LinkedIn</a></li>
             </ul>
         </nav>
 
@@ -34,12 +33,13 @@
         <section class="intro">
             <section id="nome">
                 <h1>Aglemar Reis</h1>
-                <h2>full stack developer</h2>
+                <h2>Full Stack Developer</h2>
             </section>
 
             <figure id="foto">
                 <img class="img-perfil"
-                     src="img/perfil.avif"
+                     src="img/perfil.webp"
+                     width="500" height="500"
                      alt="Foto do perfil">
                 <figcaption>Foto do perfil</figcaption>
             </figure>
@@ -79,16 +79,17 @@
 
         <!--Conhecimentos-->
         <section id="conhecimentos">
-            <h2 id="titulo-conhecimentos">🎖️ Conhecimentos</h2>
+            <h2 id="titulo-conhecimentos">Conhecimentos</h2>
 
             <section class="secao" id="html">
                 <h3>HTML</h3>
 
                 <figure>
                     <img class="img-card"
-                         src="img/html.avif"
-                         alt="Brasão html">
-                    <figcaption>Brasão html</figcaption>
+                         src="img/html.webp"
+                         width="900" height="900" loading="lazy"
+                         alt="Ícone do HTML">
+                    <figcaption>Ícone do HTML</figcaption>
                 </figure>
 
                 <p>
@@ -129,9 +130,10 @@
 
                 <figure>
                     <img class="img-card"
-                         src="img/css.avif"
-                         alt="Brasão css">
-                    <figcaption>Brasão css</figcaption>
+                         src="img/css.webp"
+                         width="900" height="900" loading="lazy"
+                         alt="Ícone do CSS">
+                    <figcaption>Ícone do CSS</figcaption>
                 </figure>
 
                 <p>
@@ -171,9 +173,10 @@
 
                 <figure>
                     <img class="img-card"
-                         src="img/js.avif"
-                         alt="Brasão javascript">
-                    <figcaption>Brasão javascript</figcaption>
+                         src="img/js.webp"
+                         width="900" height="900" loading="lazy"
+                         alt="Ícone do JavaScript">
+                    <figcaption>Ícone do JavaScript</figcaption>
                 </figure>
 
                 <p>
@@ -200,9 +203,10 @@
 
                 <figure>
                     <img class="img-card"
-                         src="img/java.avif"
-                         alt="Brasão java">
-                    <figcaption>Brasão java</figcaption>
+                         src="img/java.webp"
+                         width="900" height="900" loading="lazy"
+                         alt="Ícone do Java">
+                    <figcaption>Ícone do Java</figcaption>
                 </figure>
 
                 <p>
@@ -225,9 +229,10 @@
 
                 <figure>
                     <img class="img-card"
-                         src="img/git.avif"
-                         alt="Brasão git">
-                    <figcaption>Brasão git</figcaption>
+                         src="img/git.webp"
+                         width="900" height="900" loading="lazy"
+                         alt="Ícone do Git">
+                    <figcaption>Ícone do Git</figcaption>
                 </figure>
 
                 <p>
@@ -236,13 +241,13 @@
                 </p>
 
                 <p>
-                    Tenho conhecimento em <strong>controle de versões distribuído</strong>, aplicando corretamente,
-                    conceitos como commit, branch, merge, pull e push para manter histórico claro, rastreável e
+                    Tenho conhecimento em <strong>controle de versões distribuído</strong>, aplicando corretamente
+                    conceitos como commit, branch, merge, pull e push para manter um histórico claro, rastreável e
                     confiável.
                 </p>
 
                 <p>
-                    Estruturo meu fluxo com mentalidade <strong>controle incremental,</strong> compreendendo que cada
+                    Estruturo meu fluxo com a mentalidade de <strong>controle incremental</strong>, compreendendo que cada
                     commit deve representar
                     uma unidade lógica de alteração. Escrevo mensagens descritivas e utilizo branches para
                     desenvolvimento isolado,
@@ -266,13 +271,14 @@
 
                 <figure>
                     <img class="img-card"
-                         src="img/linux.avif"
-                         alt="Brasão Linux">
-                    <figcaption>Brasão Linux</figcaption>
+                         src="img/linux.webp"
+                         width="900" height="900" loading="lazy"
+                         alt="Ícone do Linux">
+                    <figcaption>Ícone do Linux</figcaption>
                 </figure>
 
                 <p>
-                    Sou entusiasta em sistema Linux, com foco na compreensão e administração de ambientes baseados em
+                    Sou entusiasta do sistema Linux, com foco na compreensão e administração de ambientes baseados em
                     software livre.
                 </p>
 
@@ -283,7 +289,7 @@
                 </p>
 
                 <p>
-                    Estruturo ambientes com mentalidade <strong>orientada a servidores,</strong> compreendendo que
+                    Estruturo ambientes com a mentalidade <strong>orientada a servidores</strong>, compreendendo que
                     estabilidade, segurança e desempenho são pilares essenciais. Configuro serviços, realizo ajustes no
                     sistema e aplico boas práticas para manter organização e previsibilidade.
                 </p>
@@ -301,23 +307,17 @@
         </section>
         <!--Fim conhecimentos-->
 
-        <!--TODO fazer a secao artigos-->
-        <!--TODO considerar um página exclusiva para artigos-->
-        <!--Artigos (APENAS NO DESKTOP)-->
-        <section id="artigos" class="desktop">
-        </section>
-        <!--Fim artigos-->
-
         <!--Projetos-->
         <section id="projetos">
-            <h2 id="titulo-projetos">📚 Projetos</h2>
+            <h2 id="titulo-projetos">Projetos</h2>
 
             <section id="super-trunfo" class="projeto secao">
                 <h3>Super Trunfo versão digital</h3>
 
                 <figure>
                     <img class="img-card"
-                         src="img/superTrunfo.avif"
+                         src="img/superTrunfo.webp"
+                         width="900" height="900" loading="lazy"
                          alt="Imagem projeto Super Trunfo">
                     <figcaption>Imagem projeto Super Trunfo</figcaption>
                 </figure>
@@ -351,21 +351,20 @@
                     </p>
                     <hr>
                     <p>
-                        <strong>Principal desafio resolvido,</strong> arrays possuem tamanho fixo. No jogo,
-                        O vencedor precisa ganhar uma carta e O derrotado precisa perder uma carta, para isso
-                        implementei
-                        uma estratégia baseada em:
-                    </P>
+                        <strong>Principal desafio resolvido:</strong> arrays possuem tamanho fixo. No jogo,
+                        o vencedor precisa ganhar uma carta e o derrotado precisa perder uma carta. Para isso,
+                        implementei uma estratégia baseada em:
+                    </p>
 
                     <ul>
                         <li><b>1-</b> Criação de um novo array com tamanho ajustado;</li>
                         <li><b>2-</b> Cópia manual dos elementos;</li>
                         <li><b>3-</b> Inserção ou remoção da carta na posição correta;</li>
-                        <li><b>4-</b> Rotação do baralho com méTODO específico (changeDeck);</li>
+                        <li><b>4-</b> Rotação do baralho com método específico (changeDeck);</li>
                     </ul>
 
                     <p>
-                        Isso foi feito através dos seguintes méTODOs:
+                        Isso foi feito através dos seguintes métodos:
                     </p>
 
                     <ul>
@@ -418,7 +417,7 @@
                     </p>
 
                     <nav class="btg-projeto">
-                        <a href="https://github.com/ReisAglemar/superTrunfo" target="_blank">
+                        <a href="https://github.com/ReisAglemar/superTrunfo" target="_blank" rel="noopener noreferrer">
                             <strong>Ver Super Trunfo no GitHub</strong></a>
                     </nav>
 
@@ -430,7 +429,8 @@
 
                 <figure>
                     <img class="img-card"
-                         src="img/garage%20Database.avif"
+                         src="img/garageDatabase.webp"
+                         width="900" height="900" loading="lazy"
                          alt="Imagem projeto Garage Database">
                     <figcaption>Imagem projeto Garage Database</figcaption>
                 </figure>
@@ -457,8 +457,8 @@
 
                     <p>
                         O usuário informa apenas os dados técnicos do veículo, e a aplicação gera um anúncio padronizado
-                        e otimizado para venda. Isso reduz esforço manual, aumenta produtividade e padroniza qualidade
-                        de anúncios.
+                        e otimizado para venda. Isso reduz o esforço manual, aumenta a produtividade e padroniza a qualidade
+                        dos anúncios.
                     </p>
                     <hr>
                     <p>
@@ -496,21 +496,22 @@
                     </p>
 
                     <nav class="btg-projeto">
-                        <a href="https://github.com/ReisAglemar/GarageDatabase" target="_blank">
+                        <a href="https://github.com/ReisAglemar/GarageDatabase" target="_blank" rel="noopener noreferrer">
                             <strong>Ver Garage Database no GitHub</strong></a>
                     </nav>
 
                 </div>
             </section>
 
-            <section id="portfolio" class="proeto secao">
+            <section id="portfolio" class="projeto secao">
                 <h3>Portfólio Pessoal</h3>
 
                 <figure>
                     <img class="img-card"
-                         src="img/portfolio.avif"
-                         alt="Imagem projeto portifólio">
-                    <figcaption>Imagem projeto Portifólio</figcaption>
+                         src="img/portfolio.webp"
+                         width="900" height="900" loading="lazy"
+                         alt="Imagem do projeto Portfólio">
+                    <figcaption>Imagem do projeto Portfólio</figcaption>
                 </figure>
 
                 <div class="overflow">
@@ -540,7 +541,7 @@
                     </p>
                     <hr>
                     <p>
-                        <strong>Decisões técnicas, arquitetura Mobile-First</strong> o layout foi pensado inicialmente
+                        <strong>Decisões técnicas e arquitetura Mobile-First:</strong> o layout foi pensado inicialmente
                         para
                         dispositivos móveis, utilizando uma única coluna como base estrutural. Elementos com classe
                         .desktop
@@ -550,23 +551,22 @@
                     <p>
                         <strong>CSS modularizado,</strong> o CSS foi dividido estrategicamente em reset.css,
                         variaveis.css,
-                        layout.css e componentes.css. TODOs importados via main.css, demonstrando organização e
+                        layout.css e componentes.css, todos importados via main.css, demonstrando organização e
                         escalabilidade do projeto.
                     </p>
 
                     <p>
                         <strong>Sistema de design baseado em variáveis,</strong> a utilização de :root centraliza tokens
                         de
-                        design como, paleta de cores, pesos tipográficos, breakpoints (mobile, tablet, desktop).
+                        design como paleta de cores, pesos tipográficos e breakpoints (mobile, tablet, desktop).
                         Isso permite manutenção simples e evolução consistente do layout.
                     </p>
 
                     <p>
                         <strong>Estrutura preparada para evolução backend,</strong> mesmo sendo estático na v1.0, o
                         projeto
-                        já possui, seção dedicada para artigos, estrutura pensada para cards dinâmicos, separação lógica
-                        e
-                        clara entre seções.
+                        já possui seção dedicada para artigos, estrutura pensada para cards dinâmicos, e separação lógica
+                        e clara entre seções.
                     </p>
                     <hr>
 
@@ -585,21 +585,22 @@
                     </p>
 
                     <nav class="btg-projeto">
-                        <a href="https://github.com/ReisAglemar/Portfolio" target="_blank">
-                            <strong>Ver Portifólio no GitHub</strong></a>
+                        <a href="https://github.com/ReisAglemar/Portfolio" target="_blank" rel="noopener noreferrer">
+                            <strong>Ver Portfólio no GitHub</strong></a>
                     </nav>
 
                 </div>
             </section>
 
-            <section id="novo-projeto" class="proeto secao desktop">
+            <section id="novo-projeto" class="projeto secao desktop">
                 <h3>Script de Automação</h3>
 
                 <figure>
                     <img class="img-card"
-                         src="img/bash.avif"
-                         alt="Imagem projeto bash">
-                    <figcaption>Imagem projeto Bash</figcaption>
+                         src="img/bash.webp"
+                         width="900" height="900" loading="lazy"
+                         alt="Imagem do projeto Bash">
+                    <figcaption>Imagem do projeto Bash</figcaption>
                 </figure>
 
                 <div class="overflow">
@@ -625,7 +626,7 @@
 
                     <p>
                         O foco principal foi entender profundamente como o sistema de permissões do Linux funciona
-                        (usuário, grupo e outros), evitando risco como escalonamento indevido de privilégios.
+                        (usuário, grupo e outros), evitando riscos como o escalonamento indevido de privilégios.
                     </p>
                     <hr>
                     <p>
@@ -680,7 +681,7 @@
                     </p>
 
                     <nav class="btg-projeto">
-                        <a href="https://github.com/ReisAglemar/scripstLinux" target="_blank">
+                        <a href="https://github.com/ReisAglemar/scripstLinux" target="_blank" rel="noopener noreferrer">
                             <strong>Ver Script no GitHub</strong></a>
                     </nav>
                 </div>
@@ -696,9 +697,9 @@
     <footer id="footer">
         <section class="container-footer">
 
-            <h2>📤 Entre em Contato</h2>
+            <h2>Contato</h2>
 
-            <form action="https://formspree.io/f/mjgelvky" method="POST">
+            <form id="form-contato" action="/api/contato" method="POST">
 
                 <label for="name">Nome
                     <input type="text"
@@ -724,7 +725,15 @@
                               required></textarea>
                 </label>
 
-                <button type="submit">Enviar ></button>
+                <input type="text"
+                       name="website"
+                       tabindex="-1"
+                       autocomplete="off"
+                       aria-hidden="true"
+                       style="position:absolute;left:-9999px">
+
+                <button type="submit">Enviar &gt;</button>
+                <p id="form-status" role="status" aria-live="polite"></p>
             </form>
 
             <section class="versao">
